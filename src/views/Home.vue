@@ -313,7 +313,7 @@ const router = useRouter()
 
 // 获取图标URL
 const getIconUrl = (filename) => {
-  return `/images/icon/${filename}`
+  return `./images/icon/${filename}`
 }
 
 // 当前定位
