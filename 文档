@@ -1,0 +1,66 @@
+<div style="width: 375px; height: 812px; position: relative; background: white; overflow: hidden">
+  <div style="width: 375px; height: 812px; left: 375px; top: 812px; position: absolute; transform: rotate(180deg); transform-origin: top left; background: linear-gradient(180deg, #E1EFFC 0%, rgba(225, 239, 252, 0) 100%)"></div>
+  <div style="width: 375px; height: 812px; left: 375px; top: 812px; position: absolute; transform: rotate(180deg); transform-origin: top left; background: linear-gradient(180deg, #E1EFFC 0%, rgba(225, 239, 252, 0) 100%)"></div>
+  <div style="width: 236px; height: 236px; left: 120px; top: 161px; position: absolute; transform: rotate(180deg); transform-origin: top left; background: #F9EFD7; box-shadow: 92.42158508300781px 92.42158508300781px 92.42158508300781px; filter: blur(46.21px)"></div>
+  <div style="width: 166px; height: 166px; left: 263px; top: 118px; position: absolute; transform: rotate(180deg); transform-origin: top left; background: white; box-shadow: 100.57643127441406px 100.57643127441406px 100.57643127441406px; border-radius: 9999px; filter: blur(50.29px)"></div>
+  <div style="width: 302px; height: 302px; left: 501px; top: 202px; position: absolute; transform: rotate(180deg); transform-origin: top left; background: #9AD0FF; box-shadow: 135.91409301757812px 135.91409301757812px 135.91409301757812px; filter: blur(67.96px)"></div>
+  <div style="width: 510px; height: 510px; left: 443px; top: 551px; position: absolute; transform: rotate(180deg); transform-origin: top left; background: #EFFCF8; box-shadow: 135.91409301757812px 135.91409301757812px 135.91409301757812px; border-radius: 9999px; filter: blur(67.96px)"></div>
+  <div style="width: 375px; height: 812px; left: 375px; top: 812px; position: absolute; transform: rotate(180deg); transform-origin: top left; background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #F3F7F8 100%)"></div>
+  <div style="width: 375px; height: 44px; left: 0px; top: 0px; position: absolute; overflow: hidden">
+    <div style="width: 375px; height: 44px; left: 0px; top: 0px; position: absolute"></div>
+    <div style="width: 54px; left: 21px; top: 14px; position: absolute; text-align: center; color: #262626; font-size: 15px; font-family: PingFang SC; font-weight: 400; word-wrap: break-word">9:41</div>
+    <div style="width: 22px; height: 11.33px; left: 336.33px; top: 17.33px; position: absolute; border-radius: 2.67px; border: 1px #262626 solid"></div>
+    <div style="width: 1.33px; height: 4px; left: 359.33px; top: 21px; position: absolute; background: #262626"></div>
+    <div style="width: 18px; height: 7.33px; left: 338.33px; top: 19.33px; position: absolute; background: #262626; border-radius: 1.33px"></div>
+  </div>
+  <div style="width: 87px; height: 32px; left: 282px; top: 50px; position: absolute; overflow: hidden">
+    <div style="width: 87px; height: 32px; left: 0px; top: 0px; position: absolute; background: rgba(255, 255, 255, 0.60); border-radius: 25px; border: 0.50px rgba(150.96, 150.96, 150.96, 0.20) solid"></div>
+    <div style="width: 0.50px; height: 18.50px; left: 43.50px; top: 6.50px; position: absolute; background: rgba(0, 0, 0, 0.20)"></div>
+  </div>
+  <div style="left: 32px; top: 120px; position: absolute; color: #262626; font-size: 24px; font-family: PingFang SC; font-weight: 600; line-height: 32px; word-wrap: break-word">发布需求</div>
+  <div style="left: 32px; top: 168px; position: absolute; color: #262626; font-size: 20px; font-family: PingFang SC; font-weight: 400; line-height: 32px; word-wrap: break-word">你要装修的是？</div>
+  <div style="left: 32px; top: 464px; position: absolute; color: #262626; font-size: 14px; font-family: PingFang SC; font-weight: 500; line-height: 32px; word-wrap: break-word">请选择具体类型</div>
+  <div style="width: 88px; height: 32px; left: 32px; top: 508px; position: absolute; background: linear-gradient(135deg, #78C9FD 0%, #4E94FC 100%); border-radius: 32px"></div>
+  <div style="left: 48px; top: 516px; position: absolute; color: white; font-size: 14px; font-family: PingFang SC; font-weight: 400; line-height: 16px; word-wrap: break-word">新房毛坯</div>
+  <div style="width: 102px; height: 32px; left: 32px; top: 556px; position: absolute; background: white; border-radius: 32px"></div>
+  <div style="left: 48px; top: 564px; position: absolute; color: #262626; font-size: 14px; font-family: PingFang SC; font-weight: 400; line-height: 16px; word-wrap: break-word">二手房翻新</div>
+  <div style="width: 88px; height: 32px; left: 136px; top: 508px; position: absolute; background: white; border-radius: 32px"></div>
+  <div style="left: 152px; top: 516px; position: absolute; color: #262626; font-size: 14px; font-family: PingFang SC; font-weight: 400; line-height: 16px; word-wrap: break-word">老房改造</div>
+  <div style="width: 88px; height: 32px; left: 150px; top: 556px; position: absolute; background: white; border-radius: 32px"></div>
+  <div style="left: 166px; top: 564px; position: absolute; color: #262626; font-size: 14px; font-family: PingFang SC; font-weight: 400; line-height: 16px; word-wrap: break-word">别墅装修</div>
+  <div style="width: 88px; height: 32px; left: 240px; top: 508px; position: absolute; background: white; border-radius: 32px"></div>
+  <div style="left: 256px; top: 516px; position: absolute; color: #262626; font-size: 14px; font-family: PingFang SC; font-weight: 400; line-height: 16px; word-wrap: break-word">公寓装修</div>
+  <div style="width: 134px; height: 5px; left: 121px; top: 798px; position: absolute; overflow: hidden">
+    <div style="width: 134px; height: 5px; left: 0px; top: 0px; position: absolute; overflow: hidden">
+      <div style="width: 134px; height: 5px; left: 0px; top: 0px; position: absolute"></div>
+      <div style="width: 134px; height: 5px; left: 0px; top: 0px; position: absolute; background: black"></div>
+      <div style="width: 134px; height: 5px; left: 0px; top: 0px; position: absolute; background: #262626; border-radius: 100px"></div>
+    </div>
+  </div>
+  <div style="width: 8.91px; height: 15.53px; left: 10px; top: 58px; position: absolute; overflow: hidden">
+    <div style="width: 18px; height: 18px; left: -4.55px; top: -1.23px; position: absolute"></div>
+    <div style="width: 8.91px; height: 15.53px; left: 0px; top: 0px; position: absolute; background: #262626"></div>
+  </div>
+  <div style="width: 148px; height: 200px; left: 32px; top: 240px; position: absolute; opacity: 0.80; background: linear-gradient(180deg, #F3F9FF 0%, #F8FBFF 100%); box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.05); border-radius: 8px; outline: 1px #78C9FD solid"></div>
+  <div style="width: 148px; height: 200px; left: 195px; top: 240px; position: absolute; opacity: 0.80; background: linear-gradient(180deg, #F3F9FF 0%, #F8FBFF 100%); box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.05); border-radius: 8px; outline: 1px white solid"></div>
+  <div style="width: 148px; height: 80px; left: 32px; top: 240px; position: absolute; opacity: 0.80; background: white; box-shadow: 80px 80px 80px; filter: blur(40px)"></div>
+  <div style="width: 148px; height: 80px; left: 195px; top: 240px; position: absolute; opacity: 0.80; background: white; box-shadow: 80px 80px 80px; filter: blur(40px)"></div>
+  <div style="left: 90px; top: 372px; position: absolute; color: #262626; font-size: 16px; font-family: PingFang SC; font-weight: 500; line-height: 20px; word-wrap: break-word">家装</div>
+  <div style="left: 253px; top: 372px; position: absolute; color: #262626; font-size: 16px; font-family: PingFang SC; font-weight: 500; line-height: 20px; word-wrap: break-word">公装</div>
+  <div style="left: 76px; top: 400px; position: absolute; color: #8C8C8C; font-size: 12px; font-family: PingFang SC; font-weight: 400; line-height: 20px; word-wrap: break-word">住宅类装修</div>
+  <div style="left: 233px; top: 400px; position: absolute; color: #8C8C8C; font-size: 12px; font-family: PingFang SC; font-weight: 400; line-height: 20px; word-wrap: break-word">商业空间装修</div>
+  <img style="width: 120px; height: 120px; left: 46px; top: 240px; position: absolute" src="https://placehold.co/120x120" />
+  <img style="width: 120px; height: 120px; left: 209px; top: 240px; position: absolute" src="https://placehold.co/120x120" />
+  <div style="width: 375px; height: 88px; left: 0px; top: 724px; position: absolute">
+    <div style="width: 375px; height: 34px; left: 0px; top: 54px; position: absolute"></div>
+    <div style="width: 134px; height: 5px; left: 121px; top: 74px; position: absolute; overflow: hidden">
+      <div style="width: 134px; height: 5px; left: 0px; top: 0px; position: absolute; overflow: hidden">
+        <div style="width: 134px; height: 5px; left: 0px; top: 0px; position: absolute"></div>
+        <div style="width: 134px; height: 5px; left: 0px; top: 0px; position: absolute; background: black"></div>
+        <div style="width: 134px; height: 5px; left: 0px; top: 0px; position: absolute; background: #262626; border-radius: 100px"></div>
+      </div>
+    </div>
+    <div style="width: 343px; height: 40px; left: 16px; top: 8px; position: absolute; background: linear-gradient(135deg, #78C9FD 0%, #4E94FC 100%); border-radius: 8px"></div>
+    <div style="left: 167px; top: 18px; position: absolute; text-align: center; color: white; font-size: 14px; font-family: PingFang SC; font-weight: 500; line-height: 20px; word-wrap: break-word">下一步</div>
+  </div>
+</div>
