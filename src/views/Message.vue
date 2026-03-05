@@ -15,7 +15,7 @@
           <h1 class="main-title">消息</h1>
           <span class="tab-badge" v-if="messageUnreadCount > 0">{{ messageUnreadCount }}</span>
         </div>
-        <div class="title-with-badge">
+        <div class="title-with-badge" @click="goToNotification">
           <span class="notification-title">通知</span>
           <span class="tab-badge" v-if="notificationUnreadCount > 0">{{ notificationUnreadCount }}</span>
         </div>
@@ -156,6 +156,10 @@ const messageList = ref([
 
 const goToChat = (item) => {
   router.push('/chat')
+}
+
+const goToNotification = () => {
+  router.push('/notification')
 }
 </script>
 

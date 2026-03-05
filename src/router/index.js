@@ -8,6 +8,7 @@ import Chat from '../views/Chat.vue'
 import DemandList from '../views/DemandList.vue'
 import DemandManage from '../views/DemandManage.vue'
 import Todo from '../views/Todo.vue'
+import Notification from '../views/Notification.vue'
 
 const routes = [
   {
@@ -54,6 +55,11 @@ const routes = [
     path: '/todo',
     name: 'Todo',
     component: Todo
+  },
+  {
+    path: '/notification',
+    name: 'Notification',
+    component: Notification
   }
 ]
 
