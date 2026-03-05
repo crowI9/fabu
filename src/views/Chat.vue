@@ -305,7 +305,9 @@ const sendMoment = () => {
   color: #262626;
   margin: 0;
   text-align: center;
-  flex: 1;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .nav-right {
