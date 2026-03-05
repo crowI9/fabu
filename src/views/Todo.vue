@@ -11,12 +11,12 @@
     <!-- 顶部导航栏 - 与消息页面保持一致 -->
     <div class="nav-header">
       <div class="header-row">
-        <div class="nav-left">
-          <h1 class="page-title">待办</h1>
+        <div class="title-with-badge">
+          <h1 class="main-title">待办</h1>
         </div>
-        <div class="nav-actions">
-          <img src="/images/icon/capsule-btn.png" alt="更多" class="capsule-btn">
-        </div>
+      </div>
+      <div class="nav-actions">
+        <img src="/images/icon/capsule-btn.png" alt="更多" class="capsule-btn">
       </div>
     </div>
 
@@ -258,26 +258,30 @@ const activeTab = ref('todo')
   /* iOS 导航栏规范 */
   height: 44px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .header-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 24px;
   height: 100%;
 }
 
-.nav-left {
+.title-with-badge {
   display: flex;
   align-items: center;
+  gap: 4px;
 }
 
-.page-title {
-  font-size: 32px;
-  font-family: 'DingTalk JinBuTi', 'PingFang SC', -apple-system, sans-serif;
-  font-weight: 400;
+.main-title {
+  font-family: 'PingFang SC', -apple-system, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
   color: #262626;
-  line-height: 30px;
+  line-height: 32px;
   margin: 0;
 }
 

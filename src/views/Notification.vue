@@ -242,16 +242,17 @@ const goToMessage = () => {
   cursor: pointer;
 }
 
-.main-title {
+.header-row .main-title {
   font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-size: 17px;
-  font-weight: 400;
-  color: #8C8C8C;
+  font-size: 16px;
+  font-weight: 500;
+  color: #595959;
   line-height: 22px;
   margin: 0;
+  cursor: pointer;
 }
 
-.notification-title {
+.header-row .notification-title {
   font-family: 'PingFang SC', -apple-system, sans-serif;
   font-size: 24px;
   font-weight: 600;
