@@ -50,8 +50,8 @@ body {
   max-width: 430px;
   margin: 0 auto;
   background: #f5f5f5;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
+  height: 100vh;
+  height: -webkit-fill-available;
   position: relative;
   overflow-x: hidden;
 }

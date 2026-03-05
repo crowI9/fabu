@@ -357,8 +357,7 @@ const confirmSendDemand = () => {
 
 <style scoped>
 .chat-page {
-  height: 100vh;
-  height: -webkit-fill-available;
+  height: 100%;
   background: #F3F7F8;
   position: relative;
   overflow: hidden;
@@ -424,8 +423,7 @@ const confirmSendDemand = () => {
 .page-container {
   position: relative;
   z-index: 10;
-  height: 100vh;
-  height: -webkit-fill-available;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
