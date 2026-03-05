@@ -31,29 +31,30 @@
     <div class="page-content">
       <!-- 用户信息卡片 -->
       <div class="user-card">
-        <div class="user-info">
-          <img src="/images/avatar/worker1.jpg" alt="头像" class="user-avatar">
-          <div class="user-detail">
-            <div class="user-name-row">
-              <span class="user-name">王师傅</span>
-              <span class="user-tag">水电工/泥瓦工/木工</span>
-            </div>
-            <div class="user-location">深圳市 · 南山区</div>
+        <div class="user-card-header">
+          <div class="user-basic">
+            <span class="user-name">潘晓婷</span>
+            <div class="user-role">个人设计师</div>
+          </div>
+          <div class="user-avatar-wrapper">
+            <img src="/images/avatar/designer1.jpg" alt="头像" class="user-avatar">
+            <div class="view-profile">看ta主页</div>
           </div>
         </div>
-        <div class="user-stats">
-          <div class="stat-item">
-            <span class="stat-value">4.9</span>
-            <span class="stat-label">评分</span>
+        <div class="user-stats-row">
+          <span class="stat-text">已服务 <span class="stat-num">132</span> · 累计获赞 <span class="stat-num">456</span></span>
+          <div class="rating">
+            <span class="rating-score">4.7分</span>
           </div>
-          <div class="stat-item">
-            <span class="stat-value">128</span>
-            <span class="stat-label">接单</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-value">98%</span>
-            <span class="stat-label">好评</span>
-          </div>
+        </div>
+        <div class="user-tags">
+          <span class="tag">从业十年</span>
+          <span class="tag">普通平层设计</span>
+          <span class="tag">现代简约</span>
+          <span class="tag">法式复古</span>
+          <span class="tag">沟通耐心</span>
+          <span class="tag">设计创新</span>
+          <span class="tag">全套图纸</span>
         </div>
       </div>
 
@@ -267,15 +268,54 @@ const goToDemandList = () => {
 /* 用户信息卡片 */
 .user-card {
   background: white;
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: 8px;
+  padding: 12px 8px;
   flex-shrink: 0;
+  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.user-info {
+.user-card-header {
   display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.user-basic {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.user-name {
+  font-size: 16px;
+  font-family: 'PingFang SC', -apple-system, sans-serif;
+  font-weight: 700;
+  color: #262626;
+  line-height: 18px;
+}
+
+.user-role {
+  padding: 4px 8px;
+  background: linear-gradient(135deg, #78C9FD 0%, #4E94FC 100%);
+  border-radius: 16px;
+  font-size: 12px;
+  font-family: 'PingFang SC', -apple-system, sans-serif;
+  font-weight: 700;
+  color: white;
+  line-height: 14px;
+  display: inline-flex;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 16px;
+}
+
+.user-avatar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
 }
 
 .user-avatar {
@@ -283,68 +323,74 @@ const goToDemandList = () => {
   height: 56px;
   border-radius: 50%;
   object-fit: cover;
-  margin-right: 12px;
 }
 
-.user-detail {
-  flex: 1;
-}
-
-.user-name-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 4px;
-}
-
-.user-name {
-  font-size: 18px;
-  font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-weight: 600;
-  color: #262626;
-}
-
-.user-tag {
+.view-profile {
+  width: 58px;
+  height: 24px;
+  background: white;
+  border-radius: 100px;
+  border: 0.5px solid #198CFE;
   font-size: 12px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
   font-weight: 400;
-  color: #8C8C8C;
+  color: #198CFE;
+  line-height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
-.user-location {
+.user-stats-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-text {
   font-size: 14px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
   font-weight: 400;
-  color: #595959;
+  color: #8C8C8C;
+  line-height: 18px;
 }
 
-.user-stats {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding-top: 12px;
-  border-top: 1px solid #F0F0F0;
+.stat-num {
+  color: #262626;
+  font-family: 'Roboto', -apple-system, sans-serif;
+  font-weight: 500;
 }
 
-.stat-item {
+.rating {
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 4px;
 }
 
-.stat-value {
-  font-size: 20px;
+.rating-score {
+  font-size: 14px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-weight: 600;
-  color: #262626;
+  font-weight: 700;
+  color: #F55F4E;
+  line-height: 18px;
 }
 
-.stat-label {
+.user-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 4px 8px;
+  background: #E8F3FF;
+  border-radius: 4px;
   font-size: 12px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
   font-weight: 400;
-  color: #8C8C8C;
+  color: #198CFE;
+  line-height: 14px;
 }
 
 /* 聊天内容区域 */
