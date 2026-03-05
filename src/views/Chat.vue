@@ -31,20 +31,23 @@
     <div class="page-content">
       <!-- 用户信息卡片 -->
       <div class="user-card">
-        <div class="user-card-header">
-          <div class="user-basic">
-            <span class="user-name">潘晓婷</span>
-            <div class="user-role">个人设计师</div>
-          </div>
-          <div class="user-avatar-wrapper">
-            <img src="/images/avatar/designer1.jpg" alt="头像" class="user-avatar">
-            <div class="view-profile">看ta主页</div>
-          </div>
-        </div>
-        <div class="user-stats-row">
-          <span class="stat-text">已服务 <span class="stat-num">132</span> · 累计获赞 <span class="stat-num">456</span></span>
-          <div class="rating">
-            <span class="rating-score">4.7分</span>
+        <div class="user-card-main">
+          <img src="/images/avatar/designer1.jpg" alt="头像" class="user-avatar">
+          <div class="user-info">
+            <div class="user-header">
+              <span class="user-name">潘晓婷</span>
+              <span class="user-role">个人设计师</span>
+              <span class="view-profile">看ta主页</span>
+            </div>
+            <div class="user-stats">
+              <span class="rating">
+                <svg class="star-icon" width="16" height="16" viewBox="0 0 24 24" fill="#F55F4E">
+                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                </svg>
+                <span class="rating-score">4.7分</span>
+              </span>
+              <span class="stat-text">已服务 <span class="stat-num">132</span> · 累计获赞 <span class="stat-num">456</span></span>
+            </div>
           </div>
         </div>
         <div class="user-tags">
@@ -109,11 +112,53 @@
           <path d="M9 9H9.01" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M15 9H15.01" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <svg class="add-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <svg class="add-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" @click="toggleMenu">
           <circle cx="12" cy="12" r="10" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M12 8V16" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M8 12H16" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
+      </div>
+      <!-- 功能菜单 -->
+      <div class="function-menu" v-if="showMenu">
+        <div class="menu-item" @click="sendImage">
+          <div class="menu-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="3" width="18" height="18" rx="2" stroke="#262626" stroke-width="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5" fill="#262626"/>
+              <path d="M21 15L16 10L9 17H3" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="menu-text">发送图片</span>
+        </div>
+        <div class="menu-item" @click="sendAddress">
+          <div class="menu-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 5.02944 7.02944 1 12 1C16.9706 1 21 5.02944 21 10Z" stroke="#262626" stroke-width="2"/>
+              <circle cx="12" cy="10" r="3" stroke="#262626" stroke-width="2"/>
+            </svg>
+          </div>
+          <span class="menu-text">发送地址</span>
+        </div>
+        <div class="menu-item" @click="sendCase">
+          <div class="menu-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="3" width="18" height="18" rx="2" stroke="#262626" stroke-width="2"/>
+              <path d="M3 9H21" stroke="#262626" stroke-width="2"/>
+              <path d="M9 21V9" stroke="#262626" stroke-width="2"/>
+            </svg>
+          </div>
+          <span class="menu-text">发送案例</span>
+        </div>
+        <div class="menu-item" @click="sendMoment">
+          <div class="menu-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="#262626" stroke-width="2"/>
+              <circle cx="12" cy="12" r="4" stroke="#262626" stroke-width="2"/>
+              <circle cx="18" cy="6" r="2" fill="#262626"/>
+            </svg>
+          </div>
+          <span class="menu-text">发送动态</span>
+        </div>
       </div>
     </div>
   </div>
@@ -268,54 +313,18 @@ const goToDemandList = () => {
 /* 用户信息卡片 */
 .user-card {
   background: white;
-  border-radius: 8px;
-  padding: 12px 8px;
+  border-radius: 12px;
+  padding: 16px;
   flex-shrink: 0;
-  backdrop-filter: blur(2px);
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.user-card-header {
+.user-card-main {
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
-}
-
-.user-basic {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.user-name {
-  font-size: 16px;
-  font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-weight: 700;
-  color: #262626;
-  line-height: 18px;
-}
-
-.user-role {
-  padding: 4px 8px;
-  background: linear-gradient(135deg, #78C9FD 0%, #4E94FC 100%);
-  border-radius: 16px;
-  font-size: 12px;
-  font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-weight: 700;
-  color: white;
-  line-height: 14px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.user-avatar-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
+  gap: 12px;
 }
 
 .user-avatar {
@@ -323,11 +332,43 @@ const goToDemandList = () => {
   height: 56px;
   border-radius: 50%;
   object-fit: cover;
+  flex-shrink: 0;
+}
+
+.user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.user-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.user-name {
+  font-size: 18px;
+  font-family: 'PingFang SC', -apple-system, sans-serif;
+  font-weight: 600;
+  color: #262626;
+}
+
+.user-role {
+  padding: 2px 10px;
+  background: linear-gradient(135deg, #78C9FD 0%, #4E94FC 100%);
+  border-radius: 12px;
+  font-size: 12px;
+  font-family: 'PingFang SC', -apple-system, sans-serif;
+  font-weight: 500;
+  color: white;
 }
 
 .view-profile {
-  width: 58px;
-  height: 24px;
+  margin-left: auto;
+  padding: 4px 12px;
   background: white;
   border-radius: 100px;
   border: 0.5px solid #198CFE;
@@ -335,31 +376,14 @@ const goToDemandList = () => {
   font-family: 'PingFang SC', -apple-system, sans-serif;
   font-weight: 400;
   color: #198CFE;
-  line-height: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   cursor: pointer;
 }
 
-.user-stats-row {
+.user-stats {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-}
-
-.stat-text {
-  font-size: 14px;
-  font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-weight: 400;
-  color: #8C8C8C;
-  line-height: 18px;
-}
-
-.stat-num {
-  color: #262626;
-  font-family: 'Roboto', -apple-system, sans-serif;
-  font-weight: 500;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .rating {
@@ -368,12 +392,27 @@ const goToDemandList = () => {
   gap: 4px;
 }
 
+.star-icon {
+  flex-shrink: 0;
+}
+
 .rating-score {
   font-size: 14px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   color: #F55F4E;
-  line-height: 18px;
+}
+
+.stat-text {
+  font-size: 14px;
+  font-family: 'PingFang SC', -apple-system, sans-serif;
+  font-weight: 400;
+  color: #8C8C8C;
+}
+
+.stat-num {
+  color: #262626;
+  font-weight: 500;
 }
 
 .user-tags {
@@ -383,14 +422,13 @@ const goToDemandList = () => {
 }
 
 .tag {
-  padding: 4px 8px;
+  padding: 6px 12px;
   background: #E8F3FF;
   border-radius: 4px;
-  font-size: 12px;
+  font-size: 14px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
   font-weight: 400;
   color: #198CFE;
-  line-height: 14px;
 }
 
 /* 聊天内容区域 */
