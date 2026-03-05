@@ -465,11 +465,11 @@ const confirmSendDemand = () => {
   display: block;
 }
 
-/* 用户信息卡片 - 与页面内容保持对齐 */
+/* 用户信息卡片 - 与顶部导航栏保持16px间距 */
 .user-info-card {
   position: relative;
   z-index: 10;
-  margin: 0 16px 12px;
+  margin: 16px 16px 0;
   padding: 16px;
   background: white;
   border-radius: 12px;
@@ -586,12 +586,13 @@ const confirmSendDemand = () => {
   color: #198CFE;
 }
 
-/* 聊天内容区域 - 与页面高度保持一致 */
+/* 聊天内容区域 - 与用户信息卡片保持16px间距 */
 .chat-content {
   position: relative;
   z-index: 10;
   flex: 1;
   padding: 16px;
+  margin-top: 16px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
