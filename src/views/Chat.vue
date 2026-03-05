@@ -202,8 +202,8 @@ const sendMoment = () => {
 
 <style scoped>
 .chat-page {
-  height: 100vh;
-  height: -webkit-fill-available;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
   background: #F3F7F8;
   position: relative;
   /* iOS 状态栏规范：44px 状态栏 */
