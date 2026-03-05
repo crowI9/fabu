@@ -101,7 +101,7 @@
           @click="serviceParty = 'designer'"
         >
           <div class="service-icon">
-            <img src="/images/icon/demand-design.png" alt="找设计" class="service-icon-img">
+            <img src="/images/icon/service-design.png" alt="找设计" class="service-icon-img">
           </div>
           <div class="service-info">
             <div class="service-title">找设计</div>
@@ -116,7 +116,7 @@
           @click="serviceParty = 'worker'"
         >
           <div class="service-icon">
-            <img src="/images/icon/demand-worker.png" alt="找师傅" class="service-icon-img">
+            <img src="/images/icon/service-worker.png" alt="找师傅" class="service-icon-img">
           </div>
           <div class="service-info">
             <div class="service-title">找师傅</div>
@@ -131,7 +131,7 @@
           @click="serviceParty = 'company'"
         >
           <div class="service-icon">
-            <img src="/images/icon/demand-company.png" alt="找装企" class="service-icon-img">
+            <img src="/images/icon/service-company.png" alt="找装企" class="service-icon-img">
           </div>
           <div class="service-info">
             <div class="service-title-wrap">
@@ -1198,13 +1198,15 @@ const goHome = () => {
 <style scoped>
 .publish-demand-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #E1EFFC 0%, rgba(225, 239, 252, 0) 30%, #F3F7F8 100%);
+  min-height: -webkit-fill-available;
+  background: #F3F7F8;
   position: relative;
-  padding: 0 24px;
+  /* iOS 状态栏规范：44px 状态栏 */
+  padding: 44px 24px 0;
   box-sizing: border-box;
 }
 
-/* 渐变背景装饰 */
+/* 渐变背景装饰 - 覆盖整个页面 */
 .gradient-bg {
   position: fixed;
   top: 0;
@@ -1214,6 +1216,7 @@ const goHome = () => {
   pointer-events: none;
   overflow: hidden;
   z-index: 0;
+  background: linear-gradient(180deg, #E1EFFC 0%, rgba(225, 239, 252, 0) 30%, #F3F7F8 100%);
 }
 
 .gradient-circle {
@@ -1263,7 +1266,8 @@ const goHome = () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 50px;
+  padding: 0;
+  height: 44px;
   margin-bottom: 24px;
 }
 
@@ -1363,6 +1367,9 @@ const goHome = () => {
   position: relative;
   z-index: 10;
   padding-bottom: 120px;
+  /* 与页面高度保持一致 */
+  min-height: calc(100vh - 44px - 44px - 120px);
+  min-height: calc(-webkit-fill-available - 44px - 44px - 120px);
 }
 
 /* 类型卡片行 */

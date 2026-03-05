@@ -126,19 +126,18 @@ const handlePublish = () => {
 .tab-bar {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
-  max-width: 100%;
+  max-width: 430px;
   margin: 0;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: var(--space-2, 8px) 0 calc(var(--space-2, 8px) + var(--safe-area-bottom, 0px));
+  padding: 8px 0 calc(8px + env(safe-area-inset-bottom, 0px));
   background: #FFFFFF;
   border-top: 1px solid #F0F0F0;
   z-index: 100;
-  height: var(--bottom-nav-height, 64px);
   box-sizing: border-box;
 }
 

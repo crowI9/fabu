@@ -1,65 +1,84 @@
 <template>
   <div class="chat-page">
-    <!-- 顶部导航 -->
+    <!-- 渐变背景 -->
+    <div class="gradient-bg">
+      <div class="gradient-circle circle-1"></div>
+      <div class="gradient-circle circle-2"></div>
+      <div class="gradient-circle circle-3"></div>
+      <div class="gradient-circle circle-4"></div>
+    </div>
+
+    <!-- 顶部导航栏 -->
     <div class="nav-header">
-      <div class="nav-back" @click="goBack">
-        <span class="back-arrow">‹</span>
+      <div class="nav-left" @click="goBack">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M15 19L8 12L15 5" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </div>
-      <div class="nav-title">潘晓婷</div>
+      <div class="nav-title">潘晓琪</div>
       <div class="nav-right">
-        <div class="nav-menu"></div>
+        <img src="/images/icon/capsule-btn.png" alt="更多" class="capsule-btn">
       </div>
     </div>
 
     <!-- 用户信息卡片 -->
     <div class="user-info-card">
       <div class="user-header">
-        <img src="https://placehold.co/56x85" alt="头像" class="user-avatar">
+        <img src="/images/avatar/designer1.jpg" alt="头像" class="user-avatar">
         <div class="user-details">
           <div class="user-name-row">
-            <div class="user-name">潘晓婷</div>
-            <div class="user-badge">个人设计师</div>
+            <span class="user-name">潘晓琪</span>
+            <span class="user-badge">个人设计师</span>
           </div>
           <div class="user-stats">
             <div class="rating">
-              <span class="star">★</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#F55F4E">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+              </svg>
               <span class="score">4.7分</span>
             </div>
-            <span class="stat-text">已服务 <span class="stat-num">132</span> · 累计获赞 <span class="stat-num">456</span></span>
+            <span class="stat-divider">·</span>
+            <span class="stat-text">已服务 <span class="stat-num">132</span></span>
+            <span class="stat-divider">·</span>
+            <span class="stat-text">累计获赞 <span class="stat-num">456</span></span>
           </div>
         </div>
-        <div class="view-profile">看ta主页</div>
+        <button class="view-profile-btn">看ta主页</button>
       </div>
       <div class="user-tags">
-        <div class="tag">从业十年</div>
-        <div class="tag">普通平层设计</div>
-        <div class="tag">现代简约</div>
-        <div class="tag">法式复古</div>
-        <div class="tag">沟通耐心</div>
-        <div class="tag">设计创新</div>
-        <div class="tag">全套图纸</div>
+        <span class="tag">从业十年</span>
+        <span class="tag">普通平层设计</span>
+        <span class="tag">现代简约</span>
+        <span class="tag">法式复古</span>
+        <span class="tag">沟通耐心</span>
+        <span class="tag">设计创新</span>
+        <span class="tag">全套图纸</span>
       </div>
     </div>
 
     <!-- 聊天内容区域 -->
-    <div class="chat-content">
+    <div class="chat-content" ref="chatContent">
       <div class="chat-time">2024/03/12 10:52</div>
       
       <!-- 对方消息 -->
       <div class="message-item received">
-        <img src="https://placehold.co/34x51" alt="头像" class="message-avatar">
-        <div class="message-bubble blue">
-          <div class="message-text">你好，我近期准备装修，正在找设计师，看到你的履历非常优秀，可以聊聊吗？</div>
+        <img src="/images/avatar/designer1.jpg" alt="头像" class="message-avatar">
+        <div class="message-content">
+          <div class="message-bubble blue">
+            <div class="message-text">你好，我近期准备装修，正在找设计师，看到你的履历非常优秀，可以聊聊吗？</div>
+          </div>
+          <div class="read-status">已读</div>
         </div>
-        <div class="read-status">已读</div>
       </div>
 
       <!-- 我的消息 -->
       <div class="message-item sent">
-        <div class="message-bubble white">
-          <div class="message-text">可以的，您把需求先发我看看，然后咱们再详细沟通~</div>
+        <div class="message-content">
+          <div class="message-bubble white">
+            <div class="message-text">可以的，您把需求先发我看看，然后咱们再详细沟通~</div>
+          </div>
         </div>
-        <img src="https://placehold.co/32x48" alt="头像" class="message-avatar">
+        <img src="/images/avatar/worker1.jpg" alt="头像" class="message-avatar">
       </div>
 
       <!-- 动态渲染的消息列表 -->
@@ -70,71 +89,81 @@
       >
         <!-- 对方消息 -->
         <template v-if="msg.type === 'received'">
-          <img src="https://placehold.co/34x51" alt="头像" class="message-avatar">
-          <!-- 文本消息 -->
-          <div v-if="msg.messageType === 'text'" class="message-bubble blue">
-            <div class="message-text">{{ msg.content }}</div>
-          </div>
-          <!-- 需求卡片消息 -->
-          <div v-else-if="msg.messageType === 'demand'" class="demand-card-message">
-            <div class="demand-card">
-              <div class="demand-title">装修需求</div>
-              <div class="demand-info">
-                <div class="info-row">
-                  <span class="label">类型：</span>
-                  <span class="value">{{ msg.demand.type }}</span>
+          <img src="/images/avatar/designer1.jpg" alt="头像" class="message-avatar">
+          <div class="message-content">
+            <!-- 文本消息 -->
+            <div v-if="msg.messageType === 'text'" class="message-bubble blue">
+              <div class="message-text">{{ msg.content }}</div>
+            </div>
+            <!-- 需求卡片消息 -->
+            <div v-else-if="msg.messageType === 'demand'" class="demand-card">
+              <div class="demand-card-header">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M9 11L12 14L22 4M21 12V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>装修需求</span>
+              </div>
+              <div class="demand-card-body">
+                <div class="demand-row">
+                  <span class="demand-label">类型：</span>
+                  <span class="demand-value">{{ msg.demand.type }}</span>
                 </div>
-                <div class="info-row">
-                  <span class="label">面积：</span>
-                  <span class="value">{{ msg.demand.area }}㎡</span>
+                <div class="demand-row">
+                  <span class="demand-label">面积：</span>
+                  <span class="demand-value">{{ msg.demand.area }}㎡</span>
                 </div>
-                <div class="info-row">
-                  <span class="label">户型：</span>
-                  <span class="value">{{ msg.demand.houseType }}</span>
+                <div class="demand-row">
+                  <span class="demand-label">户型：</span>
+                  <span class="demand-value">{{ msg.demand.houseType }}</span>
                 </div>
-                <div class="info-row">
-                  <span class="label">预算：</span>
-                  <span class="value budget">{{ msg.demand.budget }}</span>
+                <div class="demand-row">
+                  <span class="demand-label">预算：</span>
+                  <span class="demand-value budget">{{ msg.demand.budget }}</span>
                 </div>
               </div>
-              <div class="demand-footer">{{ msg.demand.community }}</div>
+              <div class="demand-card-footer">{{ msg.demand.community }}</div>
             </div>
+            <div class="read-status" v-if="msg.messageType === 'text'">已读</div>
           </div>
-          <div class="read-status" v-if="msg.messageType === 'text'">已读</div>
         </template>
 
         <!-- 我的消息 -->
         <template v-if="msg.type === 'sent'">
-          <!-- 文本消息 -->
-          <div v-if="msg.messageType === 'text'" class="message-bubble white">
-            <div class="message-text">{{ msg.content }}</div>
-          </div>
-          <!-- 需求卡片消息 -->
-          <div v-else-if="msg.messageType === 'demand'" class="demand-card-message">
-            <div class="demand-card">
-              <div class="demand-title">装修需求</div>
-              <div class="demand-info">
-                <div class="info-row">
-                  <span class="label">类型：</span>
-                  <span class="value">{{ msg.demand.type }}</span>
+          <div class="message-content">
+            <!-- 文本消息 -->
+            <div v-if="msg.messageType === 'text'" class="message-bubble white">
+              <div class="message-text">{{ msg.content }}</div>
+            </div>
+            <!-- 需求卡片消息 -->
+            <div v-else-if="msg.messageType === 'demand'" class="demand-card">
+              <div class="demand-card-header">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M9 11L12 14L22 4M21 12V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>装修需求</span>
+              </div>
+              <div class="demand-card-body">
+                <div class="demand-row">
+                  <span class="demand-label">类型：</span>
+                  <span class="demand-value">{{ msg.demand.type }}</span>
                 </div>
-                <div class="info-row">
-                  <span class="label">面积：</span>
-                  <span class="value">{{ msg.demand.area }}㎡</span>
+                <div class="demand-row">
+                  <span class="demand-label">面积：</span>
+                  <span class="demand-value">{{ msg.demand.area }}㎡</span>
                 </div>
-                <div class="info-row">
-                  <span class="label">户型：</span>
-                  <span class="value">{{ msg.demand.houseType }}</span>
+                <div class="demand-row">
+                  <span class="demand-label">户型：</span>
+                  <span class="demand-value">{{ msg.demand.houseType }}</span>
                 </div>
-                <div class="info-row">
-                  <span class="label">预算：</span>
-                  <span class="value budget">{{ msg.demand.budget }}</span>
+                <div class="demand-row">
+                  <span class="demand-label">预算：</span>
+                  <span class="demand-value budget">{{ msg.demand.budget }}</span>
                 </div>
               </div>
-              <div class="demand-footer">{{ msg.demand.community }}</div>
+              <div class="demand-card-footer">{{ msg.demand.community }}</div>
             </div>
           </div>
-          <img src="https://placehold.co/32x48" alt="头像" class="message-avatar">
+          <img src="/images/avatar/worker1.jpg" alt="头像" class="message-avatar">
         </template>
       </div>
     </div>
@@ -142,23 +171,33 @@
     <!-- 底部输入区域 -->
     <div class="chat-input-area">
       <div class="input-wrapper">
-        <div class="quick-action" @click="showDemandSelector">发需求</div>
-        <input type="text" placeholder="回复消息" class="message-input" v-model="inputMessage" @keyup.enter="sendMessage">
+        <button class="quick-action-btn" @click="showDemandSelector">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M12 5V19M5 12H19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>发需求</span>
+        </button>
+        <input 
+          type="text" 
+          class="message-input" 
+          placeholder="回复消息" 
+          v-model="inputMessage" 
+          @keyup.enter="sendMessage"
+        >
         <div class="input-actions">
-          <div class="action-btn emoji"></div>
-          <div class="action-btn plus"></div>
-        </div>
-      </div>
-      
-      <!-- 快捷功能面板 -->
-      <div class="quick-panel">
-        <div class="quick-item">
-          <div class="quick-icon image"></div>
-          <div class="quick-text">发送图片</div>
-        </div>
-        <div class="quick-item">
-          <div class="quick-icon location"></div>
-          <div class="quick-text">发送地址</div>
+          <button class="action-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8 14C8 14 9.5 16 12 16C14.5 16 16 14 16 14" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9 9H9.01" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M15 9H15.01" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="action-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 5V19M5 12H19" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
         </div>
       </div>
     </div>
@@ -167,8 +206,12 @@
     <div class="demand-selector-overlay" v-if="showDemandPanel" @click="closeDemandSelector">
       <div class="demand-selector-panel" @click.stop>
         <div class="selector-header">
-          <div class="selector-title">选择需求</div>
-          <div class="close-btn" @click="closeDemandSelector">×</div>
+          <h3 class="selector-title">选择需求</h3>
+          <button class="close-btn" @click="closeDemandSelector">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M18 6L6 18M6 6L18 18" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
         </div>
         
         <!-- 需求列表 -->
@@ -185,7 +228,9 @@
               <div class="selector-detail">{{ item.community }} · {{ item.budget }}</div>
             </div>
             <div class="selector-check" v-if="selectedDemand?.id === item.id">
-              <span class="check-icon">✓</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M20 6L9 17L4 12" stroke="#198CFE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
             </div>
           </div>
         </div>
@@ -197,8 +242,8 @@
 
         <!-- 底部按钮 -->
         <div class="selector-actions">
-          <div class="selector-btn create" @click="createNewDemand">创建新需求</div>
-          <div class="selector-btn confirm" :class="{ disabled: !selectedDemand }" @click="confirmSendDemand">发送需求</div>
+          <button class="selector-btn create" @click="createNewDemand">创建新需求</button>
+          <button class="selector-btn confirm" :class="{ disabled: !selectedDemand }" @click="confirmSendDemand">发送需求</button>
         </div>
       </div>
     </div>
@@ -206,7 +251,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -214,6 +259,7 @@ const inputMessage = ref('')
 const showDemandPanel = ref(false)
 const selectedDemand = ref(null)
 const messageList = ref([])
+const chatContent = ref(null)
 
 // 模拟需求数据
 const demandList = ref([
@@ -247,6 +293,14 @@ const goBack = () => {
   router.back()
 }
 
+const scrollToBottom = () => {
+  nextTick(() => {
+    if (chatContent.value) {
+      chatContent.value.scrollTop = chatContent.value.scrollHeight
+    }
+  })
+}
+
 const sendMessage = () => {
   if (!inputMessage.value.trim()) return
   
@@ -257,6 +311,7 @@ const sendMessage = () => {
   })
   
   inputMessage.value = ''
+  scrollToBottom()
 }
 
 const showDemandSelector = () => {
@@ -281,7 +336,6 @@ const createNewDemand = () => {
 const confirmSendDemand = () => {
   if (!selectedDemand.value) return
   
-  // 添加需求卡片消息到聊天列表
   messageList.value.push({
     type: 'sent',
     messageType: 'demand',
@@ -289,75 +343,125 @@ const confirmSendDemand = () => {
   })
   
   closeDemandSelector()
+  scrollToBottom()
 }
 </script>
 
 <style scoped>
 .chat-page {
-  min-height: 100vh;
-  background: #F2F3F5;
+  height: 100vh;
+  height: -webkit-fill-available;
+  background: #F3F7F8;
+  position: relative;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
-/* 顶部导航 */
+/* 渐变背景装饰 */
+.gradient-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  background: linear-gradient(180deg, #E1EFFC 0%, rgba(225, 239, 252, 0) 30%, #F3F7F8 100%);
+}
+
+.gradient-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.6;
+}
+
+.circle-1 {
+  width: 236px;
+  height: 236px;
+  left: -60px;
+  top: 100px;
+  background: #F9EFD7;
+  filter: blur(46px);
+}
+
+.circle-2 {
+  width: 166px;
+  height: 166px;
+  right: -40px;
+  top: 60px;
+  background: white;
+  filter: blur(50px);
+}
+
+.circle-3 {
+  width: 302px;
+  height: 302px;
+  right: -100px;
+  top: 120px;
+  background: #9AD0FF;
+  filter: blur(68px);
+}
+
+.circle-4 {
+  width: 510px;
+  height: 510px;
+  right: -200px;
+  top: 400px;
+  background: #EFFCF8;
+  filter: blur(68px);
+}
+
+/* 顶部导航栏 */
 .nav-header {
+  position: relative;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
-  background: white;
-  border-bottom: 1px solid #F6F6F6;
-  padding-top: 44px;
+  height: 44px;
+  flex-shrink: 0;
 }
 
-.nav-back {
-  width: 40px;
-  height: 40px;
+.nav-left {
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
 }
 
-.back-arrow {
-  font-size: 24px;
-  color: #262626;
-  font-weight: 300;
-}
-
 .nav-title {
   font-size: 17px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   color: #262626;
-  opacity: 0.9;
 }
 
 .nav-right {
   width: 87px;
   height: 32px;
-  background: rgba(255, 255, 255, 0.60);
-  border-radius: 25px;
-  border: 0.5px rgba(150.96, 150.96, 150.96, 0.20) solid;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.nav-menu {
-  width: 0.5px;
-  height: 18.5px;
-  background: rgba(0, 0, 0, 0.20);
+.capsule-btn {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /* 用户信息卡片 */
 .user-info-card {
-  margin: 8px;
-  padding: 12px;
+  position: relative;
+  z-index: 10;
+  margin: 0 16px 12px;
+  padding: 16px;
   background: white;
-  border-radius: 8px;
-  backdrop-filter: blur(2px);
+  border-radius: 12px;
+  flex-shrink: 0;
 }
 
 .user-header {
@@ -369,12 +473,14 @@ const confirmSendDemand = () => {
 
 .user-avatar {
   width: 56px;
-  height: 85px;
-  border-radius: 4px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .user-details {
   flex: 1;
+  min-width: 0;
 }
 
 .user-name-row {
@@ -387,86 +493,69 @@ const confirmSendDemand = () => {
 .user-name {
   font-size: 16px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-weight: 700;
-  line-height: 18px;
+  font-weight: 600;
   color: #262626;
 }
 
 .user-badge {
-  height: 20px;
-  padding: 0 8px;
+  padding: 2px 8px;
   background: linear-gradient(135deg, #78C9FD 0%, #4E94FC 100%);
-  border-radius: 16px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: 12px;
   font-size: 12px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-weight: 700;
-  line-height: 14px;
+  font-weight: 500;
   color: white;
-}
-
-.view-profile {
-  width: 58px;
-  height: 24px;
-  border-radius: 100px;
-  outline: 0.5px #198CFE solid;
-  outline-offset: -0.25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-weight: 400;
-  line-height: 16px;
-  color: #198CFE;
 }
 
 .user-stats {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
+  flex-wrap: wrap;
 }
 
 .rating {
   display: flex;
   align-items: center;
-  gap: 2px;
-}
-
-.star {
-  width: 18px;
-  height: 16px;
-  background: #F55F4E;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  color: white;
+  gap: 4px;
 }
 
 .score {
   font-size: 14px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-weight: 700;
-  line-height: 18px;
+  font-weight: 600;
   color: #F55F4E;
+}
+
+.stat-divider {
+  font-size: 14px;
+  color: #BFBFBF;
+  margin: 0 4px;
 }
 
 .stat-text {
   font-size: 14px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
   font-weight: 400;
-  line-height: 18px;
   color: #8C8C8C;
 }
 
 .stat-num {
   color: #262626;
-  font-family: 'Roboto', sans-serif;
   font-weight: 500;
+}
+
+.view-profile-btn {
+  padding: 4px 12px;
+  background: transparent;
+  border: 1px solid #198CFE;
+  border-radius: 100px;
+  font-size: 12px;
+  font-family: 'PingFang SC', -apple-system, sans-serif;
+  font-weight: 400;
+  color: #198CFE;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 .user-tags {
@@ -476,25 +565,23 @@ const confirmSendDemand = () => {
 }
 
 .tag {
-  height: 20px;
-  padding: 0 8px;
+  padding: 4px 10px;
   background: linear-gradient(0deg, #E8F3FF 0%, #E8F3FF 100%), white;
   border-radius: 4px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   font-size: 12px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
   font-weight: 400;
-  line-height: 14px;
   color: #198CFE;
 }
 
 /* 聊天内容区域 */
 .chat-content {
+  position: relative;
+  z-index: 10;
   flex: 1;
   padding: 16px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .chat-time {
@@ -502,7 +589,6 @@ const confirmSendDemand = () => {
   font-size: 12px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
   font-weight: 400;
-  line-height: 20px;
   color: #8C8C8C;
   margin-bottom: 16px;
 }
@@ -523,29 +609,34 @@ const confirmSendDemand = () => {
 }
 
 .message-avatar {
-  width: 32px;
-  height: 48px;
-  border-radius: 4px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.message-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 70%;
 }
 
 .message-bubble {
-  max-width: 248px;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  word-wrap: break-word;
 }
 
 .message-bubble.blue {
   background: #198CFE;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  border-bottom-left-radius: 8px;
+  border-bottom-left-radius: 4px;
 }
 
 .message-bubble.white {
   background: white;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-bottom-right-radius: 4px;
 }
 
 .message-text {
@@ -553,7 +644,6 @@ const confirmSendDemand = () => {
   font-family: 'PingFang SC', -apple-system, sans-serif;
   font-weight: 400;
   line-height: 20px;
-  word-wrap: break-word;
 }
 
 .message-bubble.blue .message-text {
@@ -565,125 +655,118 @@ const confirmSendDemand = () => {
 }
 
 .read-status {
-  font-size: 12px;
+  font-size: 11px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
   font-weight: 400;
-  line-height: 10px;
   color: #8C8C8C;
-  align-self: flex-end;
-  margin-bottom: 8px;
+  align-self: flex-start;
 }
 
-/* 需求卡片消息 */
-.demand-card-message {
-  max-width: 300px;
-  width: 280px;
-}
-
+/* 需求卡片 */
 .demand-card {
   background: white;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 260px;
 }
 
-.demand-title {
+.demand-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   padding: 12px 16px;
-  background: linear-gradient(121deg, #5BF7FE 0%, #165FE6 100%);
-  color: white;
+  background: linear-gradient(135deg, #78C9FD 0%, #4E94FC 100%);
   font-size: 14px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-weight: 700;
+  font-weight: 600;
+  color: white;
 }
 
-.demand-info {
+.demand-card-body {
   padding: 12px 16px;
 }
 
-.info-row {
+.demand-row {
   display: flex;
   margin-bottom: 8px;
 }
 
-.info-row:last-child {
+.demand-row:last-child {
   margin-bottom: 0;
 }
 
-.info-row .label {
+.demand-label {
   font-size: 13px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
+  font-weight: 400;
   color: #8C8C8C;
   min-width: 45px;
 }
 
-.info-row .value {
+.demand-value {
   font-size: 13px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
-  color: #262626;
   font-weight: 500;
+  color: #262626;
 }
 
-.info-row .value.budget {
+.demand-value.budget {
   color: #F55F4E;
-  font-weight: 700;
+  font-weight: 600;
 }
 
-.demand-footer {
+.demand-card-footer {
   padding: 10px 16px;
   background: #F8F9FA;
   font-size: 12px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
+  font-weight: 400;
   color: #8C8C8C;
   border-top: 1px solid #F0F0F0;
 }
 
 /* 底部输入区域 */
 .chat-input-area {
+  position: relative;
+  z-index: 10;
   background: white;
-  padding: 8px;
-  padding-bottom: 34px;
+  padding: 12px 16px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  flex-shrink: 0;
 }
 
 .input-wrapper {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px;
-  background: #F5F5F6;
-  border-radius: 100px;
-  margin-bottom: 8px;
+  gap: 12px;
 }
 
-.quick-action {
-  height: 28px;
-  padding: 0 12px;
-  background: linear-gradient(121deg, #5BF7FE 0%, #165FE6 100%);
-  border-radius: 100px;
+.quick-action-btn {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 4px;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #78C9FD 0%, #4E94FC 100%);
+  border: none;
+  border-radius: 100px;
   font-size: 12px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-weight: 700;
-  line-height: 18px;
+  font-weight: 500;
   color: white;
-  white-space: nowrap;
   cursor: pointer;
-  transition: opacity 0.2s ease;
-}
-
-.quick-action:active {
-  opacity: 0.8;
+  flex-shrink: 0;
 }
 
 .message-input {
   flex: 1;
+  height: 40px;
+  padding: 0 16px;
+  background: #F5F5F6;
   border: none;
-  background: transparent;
-  font-size: 12px;
+  border-radius: 20px;
+  font-size: 14px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
   font-weight: 400;
-  line-height: 18px;
   color: #262626;
   outline: none;
 }
@@ -694,57 +777,19 @@ const confirmSendDemand = () => {
 
 .input-actions {
   display: flex;
+  align-items: center;
   gap: 8px;
 }
 
 .action-btn {
-  width: 24px;
-  height: 24px;
-  background: #262626;
-  border-radius: 50%;
-}
-
-/* 快捷功能面板 */
-.quick-panel {
-  display: flex;
-  gap: 16px;
-  padding: 8px 16px;
-  background: #F5F5F6;
-}
-
-.quick-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.quick-icon {
-  width: 56px;
-  height: 56px;
-  background: white;
-  border-radius: 8px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.quick-icon.image {
-  background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z'/%3E%3C/svg%3E") no-repeat center;
-  background-size: 24px;
-}
-
-.quick-icon.location {
-  background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/%3E%3C/svg%3E") no-repeat center;
-  background-size: 24px;
-}
-
-.quick-text {
-  font-size: 14px;
-  font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-weight: 400;
-  text-align: center;
-  color: #8C8C8C;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 /* 需求选择弹窗 */
@@ -781,25 +826,25 @@ const confirmSendDemand = () => {
 .selector-title {
   font-size: 17px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   color: #262626;
 }
 
 .close-btn {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  color: #8C8C8C;
+  background: transparent;
+  border: none;
   cursor: pointer;
 }
 
 .selector-list {
   flex: 1;
   overflow-y: auto;
-  padding: 12px 16px;
+  padding: 16px;
   max-height: 400px;
 }
 
@@ -812,27 +857,21 @@ const confirmSendDemand = () => {
   border-radius: 12px;
   margin-bottom: 12px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  border: 2px solid transparent;
+  transition: background-color 0.2s ease;
 }
 
-.selector-item:active {
-  transform: scale(0.98);
+.selector-item:last-child {
+  margin-bottom: 0;
 }
 
 .selector-item.selected {
-  border-color: #198CFE;
-  background: #F0F7FF;
-}
-
-.selector-info {
-  flex: 1;
+  background: #E8F3FF;
 }
 
 .selector-type {
   font-size: 15px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-weight: 600;
+  font-weight: 500;
   color: #262626;
   margin-bottom: 4px;
 }
@@ -840,78 +879,61 @@ const confirmSendDemand = () => {
 .selector-detail {
   font-size: 13px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
+  font-weight: 400;
   color: #8C8C8C;
 }
 
 .selector-check {
   width: 24px;
   height: 24px;
-  background: #198CFE;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.check-icon {
-  color: white;
-  font-size: 14px;
-}
-
 .selector-empty {
-  padding: 40px 16px;
+  padding: 40px;
   text-align: center;
 }
 
 .empty-text {
   font-size: 14px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
+  font-weight: 400;
   color: #8C8C8C;
 }
 
 .selector-actions {
   display: flex;
   gap: 12px;
-  padding: 12px 16px;
-  padding-bottom: 34px;
+  padding: 16px;
   border-top: 1px solid #F0F0F0;
 }
 
 .selector-btn {
   flex: 1;
   height: 44px;
-  border-radius: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: none;
+  border-radius: 100px;
   font-size: 15px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
 }
 
 .selector-btn.create {
-  background: white;
-  border: 1px solid #198CFE;
-  color: #198CFE;
-}
-
-.selector-btn.create:active {
-  background: #F0F7FF;
+  background: #F5F5F6;
+  color: #262626;
 }
 
 .selector-btn.confirm {
-  background: linear-gradient(121deg, #5BF7FE 0%, #165FE6 100%);
+  background: linear-gradient(135deg, #78C9FD 0%, #4E94FC 100%);
   color: white;
-}
-
-.selector-btn.confirm:active {
-  opacity: 0.9;
 }
 
 .selector-btn.confirm.disabled {
   background: #D9D9D9;
+  color: #8C8C8C;
   cursor: not-allowed;
 }
 </style>

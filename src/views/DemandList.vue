@@ -1,5 +1,12 @@
 <template>
   <div class="demand-list-page">
+    <!-- 渐变背景 -->
+    <div class="gradient-bg">
+      <div class="gradient-circle circle-1"></div>
+      <div class="gradient-circle circle-2"></div>
+      <div class="gradient-circle circle-3"></div>
+      <div class="gradient-circle circle-4"></div>
+    </div>
     <!-- 顶部导航 -->
     <div class="nav-header">
       <div class="nav-back" @click="goBack">
@@ -191,19 +198,79 @@ const sendDemand = () => {
 <style scoped>
 .demand-list-page {
   min-height: 100vh;
-  background: #F6F8F6;
+  min-height: -webkit-fill-available;
+  background: #F3F7F8;
+  position: relative;
+  /* iOS 状态栏规范：44px + 8px 间距 */
+  padding-top: 52px;
   padding-bottom: 80px;
+}
+
+/* 渐变背景装饰 - 覆盖整个页面 */
+.gradient-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  background: linear-gradient(180deg, #E1EFFC 0%, rgba(225, 239, 252, 0) 30%, #F3F7F8 100%);
+}
+
+.gradient-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.6;
+}
+
+.circle-1 {
+  width: 236px;
+  height: 236px;
+  left: -60px;
+  top: 100px;
+  background: #F9EFD7;
+  filter: blur(46px);
+}
+
+.circle-2 {
+  width: 160px;
+  height: 160px;
+  right: -40px;
+  top: 160px;
+  background: white;
+  filter: blur(60px);
+}
+
+.circle-3 {
+  width: 200px;
+  height: 200px;
+  right: -50px;
+  top: 300px;
+  background: #9AD0FF;
+  filter: blur(80px);
+}
+
+.circle-4 {
+  width: 180px;
+  height: 180px;
+  left: -30px;
+  top: 400px;
+  background: #EFFCF8;
+  filter: blur(70px);
 }
 
 /* 顶部导航 */
 .nav-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 44px 24px 12px;
   background: white;
   border-bottom: 1px solid #F6F6F6;
-  padding-top: 44px;
 }
 
 .nav-back {
@@ -211,8 +278,9 @@ const sendDemand = () => {
   height: 40px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   cursor: pointer;
+  margin-left: -8px;
 }
 
 .back-arrow {
@@ -230,6 +298,8 @@ const sendDemand = () => {
 
 .nav-right {
   width: 40px;
+  display: flex;
+  justify-content: flex-start;
 }
 
 /* 标签栏 */
@@ -289,6 +359,9 @@ const sendDemand = () => {
 /* 需求列表 */
 .demand-list {
   padding: 12px 16px;
+  /* 与页面高度保持一致 */
+  min-height: calc(100vh - 52px - 44px - 48px - 80px);
+  min-height: calc(-webkit-fill-available - 52px - 44px - 48px - 80px);
 }
 
 .demand-card {

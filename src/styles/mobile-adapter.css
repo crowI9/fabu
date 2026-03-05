@@ -1,0 +1,287 @@
+/* 移动端适配样式 */
+
+/* ========== 基础适配 ========== */
+/* 使用 vw 方案进行移动端适配，以 375px 设计稿为基准 */
+html {
+  /* 设置基准字体大小，方便 rem 计算 */
+  font-size: 16px;
+  /* 防止 iOS 点击高亮 */
+  -webkit-tap-highlight-color: transparent;
+  /* 优化字体渲染 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* 防止文字被选中 */
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* ========== 响应式断点适配 ========== */
+/* 小屏手机 (iPhone SE, 5s 等) */
+@media screen and (max-width: 320px) {
+  html {
+    font-size: 13.65px;
+  }
+}
+
+/* 标准手机 (iPhone 6/7/8/X/11/12/13/14) */
+@media screen and (min-width: 321px) and (max-width: 375px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* 大屏手机 (iPhone 6/7/8 Plus, iPhone Pro Max) */
+@media screen and (min-width: 376px) and (max-width: 414px) {
+  html {
+    font-size: 17.65px;
+  }
+}
+
+/* 超大屏手机 */
+@media screen and (min-width: 415px) and (max-width: 480px) {
+  html {
+    font-size: 20.5px;
+  }
+}
+
+/* 平板设备 */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  html {
+    font-size: 20px;
+  }
+  
+  #app {
+    max-width: 480px !important;
+    margin: 0 auto !important;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* 桌面端 */
+@media screen and (min-width: 769px) {
+  html {
+    font-size: 16px;
+  }
+  
+  #app {
+    max-width: 430px !important;
+    margin: 0 auto !important;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+    background: #fff;
+  }
+  
+  body {
+    background: #f0f0f0 !important;
+  }
+}
+
+/* ========== 安全区域适配 (刘海屏、灵动岛) ========== */
+/* iOS 11+ 安全区域 */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-area-left {
+    padding-left: env(safe-area-inset-left);
+  }
+  
+  .safe-area-right {
+    padding-right: env(safe-area-inset-right);
+  }
+  
+  /* 底部导航栏安全区域 */
+  .tab-bar-safe-area {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+  
+  /* 页面底部安全区域 */
+  .page-safe-bottom {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  }
+}
+
+/* iOS 11.2+ 安全区域 */
+@supports (padding-top: constant(safe-area-inset-top)) {
+  .safe-area-top {
+    padding-top: constant(safe-area-inset-top);
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: constant(safe-area-inset-bottom);
+  }
+}
+
+/* ========== 底部导航栏适配 ========== */
+/* 适配 iPhone X 及以上机型的底部安全区域 */
+.tab-bar {
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+/* ========== 横屏适配 ========== */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  /* 横屏时隐藏底部导航栏，或调整布局 */
+  .tab-bar {
+    padding-bottom: 8px !important;
+  }
+  
+  /* 调整页面布局 */
+  .home-page {
+    padding-bottom: 60px !important;
+  }
+}
+
+/* ========== 1px 边框适配 ========== */
+/* 高清屏 1px 边框解决方案 */
+.border-1px {
+  position: relative;
+}
+
+.border-1px::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: #e8e8e8;
+  transform: scaleY(0.5);
+  transform-origin: 0 100%;
+}
+
+@media (-webkit-min-device-pixel-ratio: 3) {
+  .border-1px::after {
+    transform: scaleY(0.333);
+  }
+}
+
+/* ========== 点击区域优化 ========== */
+/* 确保可点击元素有足够大的点击区域 */
+.clickable {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* ========== 文字大小适配 ========== */
+/* 防止 iOS 横屏时文字自动调整大小 */
+body {
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ========== 滚动优化 ========== */
+/* 平滑滚动 */
+.smooth-scroll {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* 隐藏滚动条但保留滚动功能 */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ========== 输入框适配 ========== */
+/* 防止 iOS 输入框放大 */
+input, textarea {
+  font-size: 16px;
+}
+
+/* 输入框聚焦时防止页面缩放 */
+@media screen and (max-width: 768px) {
+  input:focus, textarea:focus {
+    font-size: 16px;
+  }
+}
+
+/* ========== 图片适配 ========== */
+/* 防止图片溢出 */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ========== 字体适配 ========== */
+/* 使用系统字体栈 */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+}
+
+/* ========== 动画性能优化 ========== */
+/* 使用 GPU 加速 */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* ========== 暗黑模式适配（可选） ========== */
+@media (prefers-color-scheme: dark) {
+  /* 如需支持暗黑模式，可在此添加 */
+}
+
+/* ========== 减少动画偏好适配 ========== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ========== 工具类 ========== */
+/* 固定宽高比 */
+.aspect-ratio {
+  position: relative;
+  width: 100%;
+}
+
+.aspect-ratio::before {
+  content: '';
+  display: block;
+  padding-top: 56.25%; /* 16:9 */
+}
+
+.aspect-ratio > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 文字溢出省略 */
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-ellipsis-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Flex 布局工具类 */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

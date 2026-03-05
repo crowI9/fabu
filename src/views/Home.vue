@@ -9,11 +9,6 @@
       <div class="bg-circle bg-circle-4"></div>
     </div>
 
-    <!-- 状态栏 -->
-    <div class="status-bar">
-      <img :src="getIconUrl('status-bar.png')" alt="状态栏" class="status-bar-img">
-    </div>
-
     <!-- 顶部导航 -->
     <div class="header">
       <div class="header-left">
@@ -705,21 +700,24 @@ const goToTodo = () => {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background: var(--color-fill-1);
+  min-height: -webkit-fill-available;
+  background: #F3F7F8;
   padding-bottom: 80px;
   overflow-x: hidden;
+  /* iOS 状态栏规范：44px + 8px 间距 */
+  padding-top: 52px;
 }
 
-/* 背景装饰 */
+/* 背景装饰 - 覆盖整个页面 */
 .bg-decoration {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 812px;
+  bottom: 0;
   pointer-events: none;
   z-index: 0;
-  background: linear-gradient(180deg, #E1EFFC 36.18%, rgba(225, 239, 252, 0.0001) 100%);
+  background: linear-gradient(180deg, #E1EFFC 0%, rgba(225, 239, 252, 0) 30%, #F3F7F8 100%);
 }
 
 .bg-circle {
@@ -760,22 +758,7 @@ const goToTodo = () => {
   background: #EFFCF8;
 }
 
-/* 状态栏 */
-.status-bar {
-  position: relative;
-  padding: 8px 16px 0;
-  height: 40px;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-}
 
-.status-bar-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
 
 .time {
   font-family: 'PingFang SC', -apple-system, sans-serif;
@@ -841,14 +824,16 @@ const goToTodo = () => {
   border-radius: 1.33px;
 }
 
-/* 顶部导航 */
+/* 顶部导航 - App 规范 */
 .header {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 16px;
+  padding: 12px 16px 8px;
   z-index: 10;
+  /* 确保在状态栏下方 */
+  margin-top: 0;
 }
 
 .header-left {

@@ -1,5 +1,12 @@
 <template>
   <div class="demand-manage-page">
+    <!-- 渐变背景 -->
+    <div class="gradient-bg">
+      <div class="gradient-circle circle-1"></div>
+      <div class="gradient-circle circle-2"></div>
+      <div class="gradient-circle circle-3"></div>
+      <div class="gradient-circle circle-4"></div>
+    </div>
     <!-- 顶部导航栏 -->
     <div class="header">
       <div class="header-left" @click="goBack">
@@ -346,8 +353,68 @@ const viewOrder = (item) => {
 <style scoped>
 .demand-manage-page {
   min-height: 100vh;
-  background: #F5F5F5;
+  min-height: -webkit-fill-available;
+  background: #F3F7F8;
+  position: relative;
+  /* iOS 状态栏规范：44px */
+  padding-top: 44px;
   padding-bottom: 20px;
+}
+
+/* 渐变背景装饰 - 覆盖整个页面 */
+.gradient-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  background: linear-gradient(180deg, #E1EFFC 0%, rgba(225, 239, 252, 0) 30%, #F3F7F8 100%);
+}
+
+.gradient-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.6;
+}
+
+.circle-1 {
+  width: 236px;
+  height: 236px;
+  left: -60px;
+  top: 100px;
+  background: #F9EFD7;
+  filter: blur(46px);
+}
+
+.circle-2 {
+  width: 160px;
+  height: 160px;
+  right: -40px;
+  top: 160px;
+  background: white;
+  filter: blur(60px);
+}
+
+.circle-3 {
+  width: 200px;
+  height: 200px;
+  right: -50px;
+  top: 300px;
+  background: #9AD0FF;
+  filter: blur(80px);
+}
+
+.circle-4 {
+  width: 180px;
+  height: 180px;
+  left: -30px;
+  top: 400px;
+  background: #EFFCF8;
+  filter: blur(70px);
 }
 
 /* 顶部导航栏 */
@@ -356,8 +423,9 @@ const viewOrder = (item) => {
   top: 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 8px 16px;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 8px 24px;
   background: #FFFFFF;
   z-index: 100;
 }
@@ -371,6 +439,7 @@ const viewOrder = (item) => {
   width: 24px;
   height: 24px;
   object-fit: contain;
+  margin-left: -8px;
 }
 
 .header-title {
@@ -383,6 +452,8 @@ const viewOrder = (item) => {
 .header-right {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  margin-left: auto;
 }
 
 .capsule-btn-img {
@@ -438,6 +509,9 @@ const viewOrder = (item) => {
 /* 内容区域 */
 .content-area {
   padding: 8px;
+  /* 与页面高度保持一致 */
+  min-height: calc(100vh - 44px - 44px - 44px - 20px);
+  min-height: calc(-webkit-fill-available - 44px - 44px - 44px - 20px);
 }
 
 /* 需求列表 */
