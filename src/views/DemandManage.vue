@@ -361,7 +361,7 @@ const viewOrder = (item) => {
   padding-bottom: 20px;
 }
 
-/* 渐变背景装饰 - 覆盖整个页面 */
+/* 蓝色椭圆色块背景 */
 .gradient-bg {
   position: fixed;
   top: 0;
@@ -382,39 +382,39 @@ const viewOrder = (item) => {
 }
 
 .circle-1 {
-  width: 236px;
-  height: 236px;
-  left: -60px;
-  top: 100px;
-  background: #F9EFD7;
-  filter: blur(46px);
-}
-
-.circle-2 {
-  width: 160px;
-  height: 160px;
-  right: -40px;
-  top: 160px;
-  background: white;
-  filter: blur(60px);
-}
-
-.circle-3 {
-  width: 200px;
+  width: 280px;
   height: 200px;
-  right: -50px;
-  top: 300px;
-  background: #9AD0FF;
+  left: -80px;
+  top: 60px;
+  background: #4E94FC;
   filter: blur(80px);
 }
 
-.circle-4 {
-  width: 180px;
+.circle-2 {
+  width: 240px;
   height: 180px;
-  left: -30px;
-  top: 400px;
-  background: #EFFCF8;
+  right: -60px;
+  top: 120px;
+  background: #78C9FD;
   filter: blur(70px);
+}
+
+.circle-3 {
+  width: 300px;
+  height: 220px;
+  right: -100px;
+  top: 280px;
+  background: #9AD0FF;
+  filter: blur(90px);
+}
+
+.circle-4 {
+  width: 260px;
+  height: 200px;
+  left: -60px;
+  top: 380px;
+  background: #5BF7FE;
+  filter: blur(75px);
 }
 
 /* 顶部导航栏 */
