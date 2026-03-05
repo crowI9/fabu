@@ -315,8 +315,8 @@ const sendMoment = () => {
 }
 
 .capsule-btn {
-  width: 60px;
-  height: 24px;
+  width: 87px;
+  height: 32px;
   object-fit: contain;
   cursor: pointer;
 }
