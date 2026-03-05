@@ -351,7 +351,7 @@ const goBack = () => {
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 0 0 16px;
+  padding: 0 0 80px;
 }
 
 .chat-time {
@@ -418,15 +418,21 @@ const goBack = () => {
   color: white;
 }
 
-/* 底部输入栏 */
+/* 底部输入栏 - 固定在底部 */
 .chat-input-area {
-  position: relative;
-  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  z-index: 100;
   background: white;
   padding: 12px 16px;
   padding-bottom: calc(12px + env(safe-area-inset-bottom));
   flex-shrink: 0;
   border-top: 1px solid #F0F0F0;
+  box-sizing: border-box;
 }
 
 .input-wrapper {
