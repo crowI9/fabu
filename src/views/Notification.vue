@@ -231,7 +231,7 @@ const goToMessage = () => {
 .header-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 24px;
   height: 100%;
 }
 
