@@ -476,16 +476,17 @@ const confirmSendDemand = () => {
   display: block;
 }
 
-/* 中间内容区域 - 可滚动 */
+/* 中间内容区域 - 可滚动，与顶部导航栏保持16px间距 */
 .content-scroll-area {
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 16px;
+  padding: 0 16px 16px;
 }
 
-/* 用户信息卡片 */
+/* 用户信息卡片 - 与顶部导航栏保持16px间距 */
 .user-info-card {
+  margin-top: 16px;
   margin-bottom: 16px;
   padding: 16px;
   background: white;
@@ -602,9 +603,10 @@ const confirmSendDemand = () => {
   color: #198CFE;
 }
 
-/* 聊天内容区域 */
+/* 聊天内容区域 - 与用户信息卡片保持16px间距 */
 .chat-content {
   padding: 0;
+  margin-top: 16px;
 }
 
 .chat-time {
