@@ -309,14 +309,15 @@ const sendMoment = () => {
 }
 
 .nav-right {
-  width: 24px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
 }
 
-.more-icon {
-  flex-shrink: 0;
+.capsule-btn {
+  width: 60px;
+  height: 24px;
+  object-fit: contain;
   cursor: pointer;
 }
 
