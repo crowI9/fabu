@@ -1245,7 +1245,7 @@ const goToTodo = () => {
 .strategy-section {
   position: relative;
   margin: 8px;
-  padding: 12px;
+  padding: 16px 12px;
   background: #FFFFFF;
   border-radius: 8px;
   z-index: 10;
@@ -1255,7 +1255,7 @@ const goToTodo = () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   gap: 8px;
 }
 
@@ -1346,7 +1346,7 @@ const goToTodo = () => {
 .strategy-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
 }
 
 .strategy-item {
