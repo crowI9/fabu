@@ -757,6 +757,7 @@ const confirmSendDemand = () => {
   padding-bottom: calc(12px + env(safe-area-inset-bottom));
   flex-shrink: 0;
   border-top: 1px solid #F0F0F0;
+  margin-top: auto;
 }
 
 .input-wrapper {
