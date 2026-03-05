@@ -8,15 +8,17 @@
       <div class="gradient-circle circle-4"></div>
     </div>
 
-    <!-- 顶部导航栏 -->
+    <!-- 顶部导航栏 - 与Message页面保持完全一致 -->
     <div class="nav-header">
-      <div class="nav-left" @click="goBack">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M15 19L8 12L15 5" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+      <div class="header-row">
+        <div class="nav-left" @click="goBack">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 19L8 12L15 5" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="nav-title">潘晓琪</div>
       </div>
-      <div class="nav-title">潘晓琪</div>
-      <div class="nav-right">
+      <div class="nav-actions">
         <img src="/images/icon/capsule-btn.png" alt="更多" class="capsule-btn">
       </div>
     </div>
@@ -414,7 +416,7 @@ const confirmSendDemand = () => {
   filter: blur(68px);
 }
 
-/* 顶部导航栏 - 与Message/Todo页面保持一致 */
+/* 顶部导航栏 - 与Message页面保持完全一致 */
 .nav-header {
   position: relative;
   z-index: 10;
@@ -422,8 +424,15 @@ const confirmSendDemand = () => {
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
+  /* iOS 导航栏规范：44px */
   height: 44px;
   flex-shrink: 0;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .nav-left {
@@ -440,17 +449,20 @@ const confirmSendDemand = () => {
   font-family: 'PingFang SC', -apple-system, sans-serif;
   font-weight: 600;
   color: #262626;
+  line-height: 44px;
 }
 
-.nav-right {
-  width: 87px;
-  height: 32px;
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .capsule-btn {
-  width: 100%;
-  height: 100%;
+  width: 87px;
+  height: 32px;
   object-fit: contain;
+  display: block;
 }
 
 /* 用户信息卡片 - 与页面内容保持对齐 */
@@ -725,7 +737,7 @@ const confirmSendDemand = () => {
   border-top: 1px solid #F0F0F0;
 }
 
-/* 底部输入区域 */
+/* 底部输入区域 - 底部对齐 */
 .chat-input-area {
   position: relative;
   z-index: 10;
@@ -733,6 +745,7 @@ const confirmSendDemand = () => {
   padding: 12px 16px;
   padding-bottom: calc(12px + env(safe-area-inset-bottom));
   flex-shrink: 0;
+  margin-top: auto;
 }
 
 .input-wrapper {
