@@ -44,6 +44,8 @@ body {
   /* 延伸到状态栏 */
   min-height: 100vh;
   min-height: -webkit-fill-available;
+  /* 防止 iOS Safari 底部栏影响 */
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 #app {
@@ -51,6 +53,8 @@ body {
   margin: 0 auto;
   background: #f5f5f5;
   height: 100vh;
+  /* iOS 安全区域适配 */
+  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   height: -webkit-fill-available;
   position: relative;
   overflow-x: hidden;

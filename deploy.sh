@@ -6,7 +6,7 @@
 git checkout main
 
 # 2. 清理并重新安装依赖（避免缓存问题）
-rm -rf node_modules package-lock.json dist
+rm -rf node_modules package-lock.json dist .vite
 npm install
 
 # 3. 构建
@@ -19,22 +19,25 @@ cp -r dist/* /tmp/fabu-deploy/
 # 5. 切换到 gh-pages 分支
 git checkout gh-pages
 
-# 6. 复制构建文件到 gh-pages
+# 6. 删除 gh-pages 上的 node_modules（如果存在）
+rm -rf node_modules .vite
+
+# 7. 复制构建文件到 gh-pages
 cp -r /tmp/fabu-deploy/* .
 
-# 7. 提交并推送
+# 8. 提交并推送
 git add .
 git commit -m "Deploy update"
 git push origin gh-pages
 
-# 8. 切回 main 分支
+# 9. 切回 main 分支
 git checkout main
 
-# 9. 清理临时目录
+# 10. 清理临时目录
 rm -rf /tmp/fabu-deploy
 
-# 10. 重新安装依赖（避免缓存问题）
-rm -rf node_modules package-lock.json
+# 11. 重新安装依赖（避免缓存问题）
+rm -rf node_modules package-lock.json .vite
 npm install
 
 echo "部署完成！"
