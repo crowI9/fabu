@@ -306,7 +306,7 @@ const goToMessage = () => {
 .notification-item {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
+  padding: 16px;
   cursor: pointer;
   position: relative;
 }
@@ -351,7 +351,7 @@ const goToMessage = () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 4px;
+  margin-bottom: 16px;
 }
 
 .notification-title {
@@ -401,6 +401,6 @@ const goToMessage = () => {
 .divider {
   height: 1px;
   background: #F6F6F6;
-  margin: 0 16px 0 72px;
+  margin: 16px 16px 16px 72px;
 }
 </style>
