@@ -18,11 +18,7 @@
         </div>
         <h1 class="chat-title">王师傅</h1>
         <div class="nav-right">
-          <svg class="more-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="6" r="2" fill="#262626"/>
-            <circle cx="12" cy="12" r="2" fill="#262626"/>
-            <circle cx="12" cy="18" r="2" fill="#262626"/>
-          </svg>
+          <img src="/images/icon/capsule-btn.png" alt="更多" class="capsule-btn">
         </div>
       </div>
     </div>
