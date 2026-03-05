@@ -202,8 +202,8 @@ const sendMoment = () => {
 
 <style scoped>
 .chat-page {
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
+  height: 100vh;
+  height: -webkit-fill-available;
   background: #F3F7F8;
   position: relative;
   /* iOS 状态栏规范：44px 状态栏 */
@@ -218,8 +218,9 @@ const sendMoment = () => {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  height: -webkit-fill-available;
   pointer-events: none;
   overflow: hidden;
   z-index: 0;
@@ -227,7 +228,7 @@ const sendMoment = () => {
 }
 
 .gradient-circle {
-  position: absolute;
+  position: fixed;
   border-radius: 50%;
   filter: blur(60px);
   opacity: 0.6;

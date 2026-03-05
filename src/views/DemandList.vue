@@ -197,8 +197,8 @@ const sendDemand = () => {
 
 <style scoped>
 .demand-list-page {
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
+  height: 100vh;
+  height: -webkit-fill-available;
   background: #F3F7F8;
   position: relative;
   /* iOS 状态栏规范：44px + 8px 间距 */
@@ -211,8 +211,9 @@ const sendDemand = () => {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  height: -webkit-fill-available;
   pointer-events: none;
   overflow: hidden;
   z-index: 0;
@@ -220,7 +221,7 @@ const sendDemand = () => {
 }
 
 .gradient-circle {
-  position: absolute;
+  position: fixed;
   border-radius: 50%;
   filter: blur(60px);
   opacity: 0.6;

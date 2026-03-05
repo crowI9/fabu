@@ -7,367 +7,127 @@
       <div class="gradient-circle circle-3"></div>
       <div class="gradient-circle circle-4"></div>
     </div>
+
     <!-- 顶部导航栏 -->
-    <div class="header">
-      <div class="header-left" @click="goBack">
-        <img :src="getIconUrl('icon-back.png')" alt="返回" class="back-icon">
+    <div class="nav-header">
+      <div class="header-row">
+        <h1 class="page-title">待办</h1>
       </div>
-      <div class="header-title">需求管理</div>
-      <div class="header-right">
-        <img :src="getIconUrl('capsule-btn.png')" alt="菜单" class="capsule-btn-img">
+      <div class="nav-actions">
+        <img src="/images/icon/capsule-btn.png" alt="更多" class="capsule-btn">
       </div>
     </div>
 
-    <!-- 状态筛选标签 -->
-    <div class="status-tabs">
+    <!-- Tab 切换栏 -->
+    <div class="tab-wrapper">
       <div 
-        v-for="tab in statusTabs" 
-        :key="tab.id"
-        class="status-tab"
-        :class="{ active: currentTab === tab.id }"
-        @click="currentTab = tab.id"
+        class="tab-item" 
+        :class="{ active: activeTab === 'all' }"
+        @click="activeTab = 'all'"
       >
-        {{ tab.name }}
+        全部
+      </div>
+      <div 
+        class="tab-item" 
+        :class="{ active: activeTab === 'publish' }"
+        @click="activeTab = 'publish'"
+      >
+        已发布
+      </div>
+      <div 
+        class="tab-item" 
+        :class="{ active: activeTab === 'selecting' }"
+        @click="activeTab = 'selecting'"
+      >
+        筛选中
+      </div>
+      <div 
+        class="tab-item" 
+        :class="{ active: activeTab === 'working' }"
+        @click="activeTab = 'working'"
+      >
+        进行中
+      </div>
+      <div 
+        class="tab-item" 
+        :class="{ active: activeTab === 'completed' }"
+        @click="activeTab = 'completed'"
+      >
+        已完成
       </div>
     </div>
 
-    <!-- 内容区域 -->
-    <div class="content-area">
-      <!-- 需求列表 -->
-      <div class="demand-list">
-        <div 
-          v-for="item in filteredDemands" 
-          :key="item.id"
-          class="demand-card"
-          @click="goToDetail(item)"
-        >
-          <!-- 状态标签 -->
-          <div class="demand-status" :class="item.statusClass">{{ item.statusText }}</div>
-          
-          <!-- 需求标题 -->
-          <div class="demand-title">{{ item.title }}</div>
-          
-          <!-- 需求类型标签 -->
-          <div class="demand-tags">
-            <span class="tag type-tag" :class="item.typeClass">{{ item.type }}</span>
-            <span class="tag info-tag">{{ item.roomInfo }}</span>
-            <span class="tag info-tag">{{ item.budget }}</span>
-            <span class="tag info-tag">{{ item.time }}</span>
-            <span class="tag info-tag" v-if="item.hasDrawings">有图纸</span>
+    <!-- 需求列表 -->
+    <div class="demand-list">
+      <div class="demand-card">
+        <div class="card-header">
+          <span class="demand-tag">需求</span>
+          <span class="demand-status">筛选中</span>
+        </div>
+        <div class="card-body">
+          <div class="demand-title">100m²平层住宅 | 毛坯装修 | 全屋设计</div>
+          <div class="demand-info">
+            <span class="info-item">毛坯房</span>
+            <span class="info-item">全屋设计</span>
+            <span class="info-item">预算：5-10万</span>
           </div>
-          
-          <!-- 需求描述 -->
-          <div class="demand-desc">{{ item.description }}</div>
-          
-          <!-- 分隔线 -->
-          <div class="divider"></div>
-          
-          <!-- 用户信息 -->
-          <div class="user-info">
-            <img :src="item.avatar" alt="头像" class="user-avatar">
-            <span class="user-name">{{ item.userName }}</span>
-            <span class="publish-label">发布</span>
-            <span class="publish-time">{{ item.publishTime }}</span>
+        </div>
+        <div class="card-footer">
+          <div class="stats-text">已有 <span class="highlight-num">10</span> 位服务方报名</div>
+        </div>
+      </div>
+
+      <div class="demand-card">
+        <div class="card-header">
+          <span class="demand-tag">需求</span>
+          <span class="demand-status working">进行中</span>
+        </div>
+        <div class="card-body">
+          <div class="demand-title">80m²平层住宅 | 旧房翻新 | 局部改造</div>
+          <div class="demand-info">
+            <span class="info-item">旧房翻新</span>
+            <span class="info-item">局部改造</span>
+            <span class="info-item">预算：3-5万</span>
           </div>
-          
-          <!-- 分隔线 -->
-          <div class="divider"></div>
-          
-          <!-- 操作按钮区 -->
-          <div class="action-buttons">
-            <!-- 已报名状态 -->
-            <template v-if="item.status === 'registered'">
-              <div class="btn btn-primary" @click.stop="viewDetail(item)">查看详情</div>
-            </template>
-            
-            <!-- 待确认状态 -->
-            <template v-else-if="item.status === 'pending'">
-              <div class="btn btn-outline" @click.stop="contactOwner(item)">联系业主</div>
-              <div class="btn btn-primary" @click.stop="viewDetail(item)">查看详情</div>
-              <div class="btn btn-primary" @click.stop="acceptDemand(item)">接受需求</div>
-            </template>
-            
-            <!-- 沟通中状态 -->
-            <template v-else-if="item.status === 'communicating'">
-              <div class="btn btn-outline" @click.stop="contactOwner(item)">联系业主</div>
-              <div class="btn btn-primary" @click.stop="viewDetail(item)">查看详情</div>
-              <div class="btn btn-primary" @click.stop="submitQuote(item)">提交报价</div>
-            </template>
-            
-            <!-- 已报价状态 -->
-            <template v-else-if="item.status === 'quoted'">
-              <div class="btn btn-outline" @click.stop="contactOwner(item)">联系业主</div>
-              <div class="btn btn-primary" @click.stop="viewDetail(item)">查看详情</div>
-              <div class="btn btn-primary" @click.stop="viewQuote(item)">查看报价</div>
-            </template>
-            
-            <!-- 已下单状态 -->
-            <template v-else-if="item.status === 'ordered'">
-              <div class="btn btn-outline" @click.stop="contactOwner(item)">联系业主</div>
-              <div class="btn btn-primary" @click.stop="viewDetail(item)">查看详情</div>
-              <div class="btn btn-primary" @click.stop="viewOrder(item)">查看订单</div>
-            </template>
-            
-            <!-- 已拒绝状态 -->
-            <template v-else-if="item.status === 'rejected'">
-              <div class="btn btn-primary" @click.stop="viewDetail(item)">查看详情</div>
-            </template>
-            
-            <!-- 已关闭状态 -->
-            <template v-else-if="item.status === 'closed'">
-              <div class="btn btn-primary" @click.stop="viewDetail(item)">查看详情</div>
-            </template>
-          </div>
-          
-          <!-- 关闭原因 -->
-          <div class="close-reason" v-if="item.closeReason">
-            {{ item.closeReason }}
-          </div>
+        </div>
+        <div class="card-footer">
+          <div class="stats-text">服务方：<span class="highlight-num">潘晓琪</span></div>
         </div>
       </div>
     </div>
 
-    <!-- 底部安全区域 -->
-    <div class="safe-area-bottom"></div>
+    <!-- 底部导航栏 -->
+    <TabBar active-tab="demand" :message-count="3" :todo-count="4" />
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref } from 'vue'
+import TabBar from '../components/TabBar.vue'
 
-const router = useRouter()
-
-// 获取图标URL
-const getIconUrl = (name) => {
-  return new URL(`../assets/icon/${name}`, import.meta.url).href
-}
-
-// 状态标签
-const statusTabs = [
-  { id: 'all', name: '全部' },
-  { id: 'pending', name: '待确认' },
-  { id: 'registered', name: '已报名' },
-  { id: 'communicating', name: '沟通中' },
-  { id: 'quoted', name: '已报价' },
-  { id: 'ordered', name: '已下单' },
-  { id: 'closed', name: '已关闭' }
-]
-
-const currentTab = ref('all')
-
-// 模拟需求数据
-const demandList = ref([
-  {
-    id: 1,
-    status: 'registered',
-    statusText: '已报名',
-    statusClass: 'status-registered',
-    title: '100m²平层住宅 | 全屋设计',
-    type: '找设计师',
-    typeClass: 'type-designer',
-    roomInfo: '2室1厅1厨1卫',
-    budget: '5000元预算',
-    time: '3个月内装修',
-    hasDrawings: false,
-    description: '想找一位靠谱优秀的设计师帮忙，报价时请备注好优势...',
-    avatar: 'https://placehold.co/40x40',
-    userName: '小小要装修',
-    publishTime: '2025年2月5日 16:22'
-  },
-  {
-    id: 2,
-    status: 'pending',
-    statusText: '待确认',
-    statusClass: 'status-pending',
-    title: '100m²平层住宅 | 全屋设计',
-    type: '找设计师',
-    typeClass: 'type-designer',
-    roomInfo: '2室1厅1厨1卫',
-    budget: '5000元预算',
-    time: '3个月内装修',
-    hasDrawings: false,
-    description: '想找一位靠谱优秀的设计师帮忙，报价时请备注好优势...',
-    avatar: 'https://placehold.co/40x40',
-    userName: '小小要装修',
-    publishTime: '2025年2月5日 16:22'
-  },
-  {
-    id: 3,
-    status: 'communicating',
-    statusText: '沟通中',
-    statusClass: 'status-communicating',
-    title: '100m²平层住宅 | 仅包工',
-    type: '找水电工',
-    typeClass: 'type-worker',
-    roomInfo: '2室1厅1厨1卫',
-    budget: '5000元施工费',
-    time: '3个月内装修',
-    hasDrawings: true,
-    description: '想找一位靠谱优秀的设计师帮忙，报价时请备注好优势...',
-    avatar: 'https://placehold.co/40x40',
-    userName: '小小要装修',
-    publishTime: '2025年2月5日 16:22'
-  },
-  {
-    id: 4,
-    status: 'quoted',
-    statusText: '已报价',
-    statusClass: 'status-quoted',
-    title: '100m²平层住宅 | 全屋设计',
-    type: '找设计师',
-    typeClass: 'type-designer',
-    roomInfo: '2室1厅1厨1卫',
-    budget: '5000元预算',
-    time: '3个月内装修',
-    hasDrawings: false,
-    description: '想找一位靠谱优秀的设计师帮忙，报价时请备注好优势...',
-    avatar: 'https://placehold.co/40x40',
-    userName: '小小要装修',
-    publishTime: '2025年2月5日 16:22'
-  },
-  {
-    id: 5,
-    status: 'ordered',
-    statusText: '已下单',
-    statusClass: 'status-ordered',
-    title: '100m²平层住宅 | 全屋设计',
-    type: '找设计师',
-    typeClass: 'type-designer',
-    roomInfo: '2室1厅1厨1卫',
-    budget: '5000元预算',
-    time: '3个月内装修',
-    hasDrawings: false,
-    description: '想找一位靠谱优秀的设计师帮忙，报价时请备注好优势...',
-    avatar: 'https://placehold.co/40x40',
-    userName: '小小要装修',
-    publishTime: '2025年2月5日 16:22'
-  },
-  {
-    id: 6,
-    status: 'rejected',
-    statusText: '已拒绝',
-    statusClass: 'status-rejected',
-    title: '100m²平层住宅 | 全屋设计',
-    type: '找设计师',
-    typeClass: 'type-designer',
-    roomInfo: '2室1厅1厨1卫',
-    budget: '5000元预算',
-    time: '3个月内装修',
-    hasDrawings: false,
-    description: '想找一位靠谱优秀的设计师帮忙，报价时请备注好优势...',
-    avatar: 'https://placehold.co/40x40',
-    userName: '小小要装修',
-    publishTime: '2025年2月5日 16:22'
-  },
-  {
-    id: 7,
-    status: 'closed',
-    statusText: '已关闭',
-    statusClass: 'status-closed',
-    title: '100m²平层住宅 | 全屋设计',
-    type: '找设计师',
-    typeClass: 'type-designer',
-    roomInfo: '2室1厅1厨1卫',
-    budget: '5000元预算',
-    time: '3个月内装修',
-    hasDrawings: false,
-    description: '想找一位靠谱优秀的设计师帮忙，报价时请备注好优势...',
-    avatar: 'https://placehold.co/40x40',
-    userName: '小小要装修',
-    publishTime: '2025年2月5日 16:22',
-    closeReason: '关闭原因：业主关闭需求'
-  },
-  {
-    id: 8,
-    status: 'closed',
-    statusText: '已关闭',
-    statusClass: 'status-closed',
-    title: '100m²平层住宅 | 全屋设计',
-    type: '找设计师',
-    typeClass: 'type-designer',
-    roomInfo: '2室1厅1厨1卫',
-    budget: '5000元预算',
-    time: '3个月内装修',
-    hasDrawings: false,
-    description: '想找一位靠谱优秀的设计师帮忙，报价时请备注好优势...',
-    avatar: 'https://placehold.co/40x40',
-    userName: '小小要装修',
-    publishTime: '2025年2月5日 16:22',
-    closeReason: '关闭原因：已选择其他服务方'
-  }
-])
-
-// 筛选后的需求列表
-const filteredDemands = computed(() => {
-  if (currentTab.value === 'all') {
-    return demandList.value
-  }
-  return demandList.value.filter(item => item.status === currentTab.value)
-})
-
-// 返回上一页
-const goBack = () => {
-  router.back()
-}
-
-// 查看需求详情
-const goToDetail = (item) => {
-  console.log('查看需求详情:', item.id)
-  // router.push(`/demand-detail/${item.id}`)
-}
-
-// 查看详情
-const viewDetail = (item) => {
-  console.log('查看详情:', item.id)
-  // router.push(`/demand-detail/${item.id}`)
-}
-
-// 联系业主
-const contactOwner = (item) => {
-  console.log('联系业主:', item.id)
-  router.push('/chat')
-}
-
-// 接受需求
-const acceptDemand = (item) => {
-  console.log('接受需求:', item.id)
-}
-
-// 提交报价
-const submitQuote = (item) => {
-  console.log('提交报价:', item.id)
-}
-
-// 查看报价
-const viewQuote = (item) => {
-  console.log('查看报价:', item.id)
-}
-
-// 查看订单
-const viewOrder = (item) => {
-  console.log('查看订单:', item.id)
-}
+const activeTab = ref('all')
 </script>
 
 <style scoped>
 .demand-manage-page {
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
+  height: 100vh;
+  height: -webkit-fill-available;
   background: #F3F7F8;
   position: relative;
-  /* iOS 状态栏规范：44px */
   padding-top: 44px;
-  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-/* 蓝色椭圆色块背景 */
+/* 渐变背景 */
 .gradient-bg {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  height: -webkit-fill-available;
   pointer-events: none;
   overflow: hidden;
   z-index: 0;
@@ -375,337 +135,206 @@ const viewOrder = (item) => {
 }
 
 .gradient-circle {
-  position: absolute;
+  position: fixed;
   border-radius: 50%;
   filter: blur(60px);
   opacity: 0.6;
 }
 
 .circle-1 {
-  width: 280px;
-  height: 200px;
-  left: -80px;
-  top: 60px;
-  background: #4E94FC;
-  filter: blur(80px);
+  width: 236px;
+  height: 236px;
+  left: -60px;
+  top: 100px;
+  background: #F9EFD7;
+  filter: blur(46px);
 }
 
 .circle-2 {
-  width: 240px;
-  height: 180px;
-  right: -60px;
-  top: 120px;
-  background: #78C9FD;
-  filter: blur(70px);
+  width: 166px;
+  height: 166px;
+  right: -40px;
+  top: 60px;
+  background: white;
+  filter: blur(50px);
 }
 
 .circle-3 {
-  width: 300px;
-  height: 220px;
+  width: 302px;
+  height: 302px;
   right: -100px;
-  top: 280px;
+  top: 120px;
   background: #9AD0FF;
-  filter: blur(90px);
+  filter: blur(68px);
 }
 
 .circle-4 {
-  width: 260px;
-  height: 200px;
-  left: -60px;
-  top: 380px;
-  background: #5BF7FE;
-  filter: blur(75px);
+  width: 510px;
+  height: 510px;
+  right: -200px;
+  top: 400px;
+  background: #EFFCF8;
+  filter: blur(68px);
 }
 
 /* 顶部导航栏 */
-.header {
-  position: sticky;
-  top: 0;
+.nav-header {
+  position: relative;
+  z-index: 10;
+  padding: 12px 16px;
+  height: 44px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 12px;
-  padding: 8px 24px;
-  background: #FFFFFF;
-  z-index: 100;
+  justify-content: space-between;
 }
 
-.header-left {
+.header-row {
   display: flex;
   align-items: center;
 }
 
-.back-icon {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-  margin-left: -8px;
-}
-
-.header-title {
-  font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-size: 18px;
-  font-weight: 500;
+.page-title {
+  font-size: 32px;
+  font-family: 'DingTalk JinBuTi', 'PingFang SC', -apple-system, sans-serif;
+  font-weight: 400;
   color: #262626;
+  line-height: 30px;
+  margin: 0;
 }
 
-.header-right {
+.nav-actions {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  margin-left: auto;
 }
 
-.capsule-btn-img {
+.capsule-btn {
   width: 87px;
   height: 32px;
   object-fit: contain;
+  display: block;
 }
 
-/* 状态筛选标签 */
-.status-tabs {
+/* Tab 切换栏 */
+.tab-wrapper {
+  position: relative;
+  z-index: 10;
   display: flex;
   align-items: center;
-  gap: 24px;
-  padding: 12px 16px;
-  background: #FFFFFF;
-  border-bottom: 1px solid #F6F6F6;
+  padding: 0 16px;
+  margin-bottom: 12px;
+  gap: 16px;
   overflow-x: auto;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
+  flex-shrink: 0;
 }
 
-.status-tabs::-webkit-scrollbar {
-  display: none;
-}
-
-.status-tab {
-  font-family: 'PingFang SC', -apple-system, sans-serif;
+.tab-item {
   font-size: 14px;
-  line-height: 18px;
-  color: #8C8C8C;
+  font-family: 'PingFang SC', -apple-system, sans-serif;
+  font-weight: 400;
+  color: #979797;
   cursor: pointer;
-  position: relative;
-  padding-bottom: 4px;
+  white-space: nowrap;
+  line-height: 24px;
 }
 
-.status-tab.active {
-  color: #262626;
+.tab-item.active {
+  font-size: 14px;
   font-weight: 600;
-}
-
-.status-tab.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 32px;
-  height: 4px;
-  background: linear-gradient(90deg, #4E94FC 0%, rgba(120, 201, 253, 0) 89%);
-  border-top-left-radius: 8px;
-}
-
-/* 内容区域 */
-.content-area {
-  padding: 8px;
-  /* 与页面高度保持一致 */
-  min-height: calc(100vh - 44px - 44px - 44px - 20px);
-  min-height: calc(-webkit-fill-available - 44px - 44px - 44px - 20px);
+  color: #262626;
 }
 
 /* 需求列表 */
 .demand-list {
+  position: relative;
+  z-index: 10;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
+  padding: 0 8px 16px;
+  overflow-y: auto;
 }
 
 /* 需求卡片 */
 .demand-card {
-  background: #FFFFFF;
+  background: white;
   border-radius: 8px;
-  padding: 12px;
+  box-shadow: 0px 8px 14px rgba(224, 229, 238, 0.50);
+  padding: 16px;
+  flex-shrink: 0;
+}
+
+.card-header {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
 }
 
-/* 状态标签 */
+.demand-tag {
+  display: inline-flex;
+  padding: 4px 8px;
+  background: #E8F3FF;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'PingFang SC', -apple-system, sans-serif;
+  font-weight: 600;
+  color: #198CFE;
+  line-height: 14px;
+}
+
 .demand-status {
+  font-size: 12px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-size: 14px;
   font-weight: 500;
-  line-height: 18px;
-  text-align: right;
+  color: #FAAD14;
+  line-height: 14px;
 }
 
-.status-registered {
+.demand-status.working {
   color: #198CFE;
 }
 
-.status-pending {
-  color: #198CFE;
-}
-
-.status-communicating {
-  color: #198CFE;
-}
-
-.status-quoted {
-  color: #198CFE;
-}
-
-.status-ordered {
-  color: #198CFE;
-}
-
-.status-rejected {
-  color: #FF4D4F;
-}
-
-.status-closed {
-  color: #BFBFBF;
-}
-
-/* 需求标题 */
 .demand-title {
+  font-size: 16px;
   font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
+  font-weight: 600;
   color: #262626;
+  line-height: 22px;
+  margin-bottom: 8px;
 }
 
-/* 需求标签 */
-.demand-tags {
+.demand-info {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-bottom: 12px;
 }
 
-.tag {
-  padding: 3px 8px;
-  font-family: 'PingFang SC', -apple-system, sans-serif;
+.info-item {
   font-size: 12px;
-  line-height: 14px;
-  border-radius: 4px;
-}
-
-.type-tag {
-  color: #FFFFFF;
-  font-weight: 500;
-}
-
-.type-designer {
-  background: linear-gradient(135deg, #78C9FD 0%, #4E94FC 100%);
-}
-
-.type-worker {
-  background: linear-gradient(326deg, #0BCE80 0%, #71D85A 100%);
-}
-
-.type-company {
-  background: linear-gradient(135deg, #FF9F7F 0%, #FF6B6B 100%);
-}
-
-.info-tag {
-  color: #198CFE;
-  background: #E8F3FF;
-  font-weight: 400;
-}
-
-/* 需求描述 */
-.demand-desc {
   font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-size: 14px;
-  line-height: 20px;
-  color: #595959;
+  font-weight: 400;
+  color: #8C8C8C;
+  line-height: 16px;
 }
 
-/* 分隔线 */
-.divider {
-  width: 100%;
-  height: 1px;
-  background: #F6F6F6;
-}
-
-/* 用户信息 */
-.user-info {
+.card-footer {
   display: flex;
   align-items: center;
-  gap: 8px;
 }
 
-.user-avatar {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.user-name {
-  flex: 1;
-  font-family: 'PingFang SC', -apple-system, sans-serif;
+.stats-text {
   font-size: 14px;
-  line-height: 20px;
+  font-family: 'PingFang SC', -apple-system, sans-serif;
+  font-weight: 400;
   color: #8C8C8C;
-}
-
-.publish-label {
-  font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-size: 14px;
   line-height: 18px;
-  color: #8C8C8C;
 }
 
-.publish-time {
-  font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-size: 14px;
-  line-height: 18px;
-  color: #8C8C8C;
-  text-align: right;
-}
-
-/* 操作按钮区 */
-.action-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-}
-
-.btn {
-  padding: 6px 16px;
-  font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 500;
-  border-radius: 100px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.btn-primary {
-  color: #FFFFFF;
-  background: linear-gradient(121deg, #5BF7FE 0%, #165FE6 100%);
-}
-
-.btn-outline {
+.stats-text .highlight-num {
   color: #198CFE;
-  background: #FFFFFF;
-  border: 1px solid #198CFE;
-}
-
-/* 关闭原因 */
-.close-reason {
-  font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-size: 12px;
-  line-height: 18px;
-  color: #8C8C8C;
-}
-
-/* 安全区域 */
-.safe-area-bottom {
-  height: 20px;
+  font-weight: 500;
 }
 </style>

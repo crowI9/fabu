@@ -116,7 +116,7 @@
           @click="serviceParty = 'worker'"
         >
           <div class="service-icon">
-            <img src="/images/icon/service-worker.png" alt="找师傅" class="service-icon-img">
+            <img src="/images/icon/demand-worker.png" alt="找师傅" class="service-icon-img">
           </div>
           <div class="service-info">
             <div class="service-title">找师傅</div>
@@ -131,7 +131,7 @@
           @click="serviceParty = 'company'"
         >
           <div class="service-icon">
-            <img src="/images/icon/service-company.png" alt="找装企" class="service-icon-img">
+            <img src="/images/icon/demand-company.png" alt="找装企" class="service-icon-img">
           </div>
           <div class="service-info">
             <div class="service-title-wrap">
@@ -1197,8 +1197,8 @@ const goHome = () => {
 
 <style scoped>
 .publish-demand-page {
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
+  height: 100vh;
+  height: -webkit-fill-available;
   background: #F3F7F8;
   position: relative;
   /* iOS 状态栏规范：44px 状态栏 */
@@ -1211,8 +1211,9 @@ const goHome = () => {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  height: -webkit-fill-available;
   pointer-events: none;
   overflow: hidden;
   z-index: 0;
@@ -1220,7 +1221,7 @@ const goHome = () => {
 }
 
 .gradient-circle {
-  position: absolute;
+  position: fixed;
   border-radius: 50%;
   filter: blur(60px);
   opacity: 0.6;
@@ -1366,10 +1367,12 @@ const goHome = () => {
 .step-content {
   position: relative;
   z-index: 10;
-  padding-bottom: 120px;
-  /* 与页面高度保持一致 */
-  min-height: calc(100vh - 44px - 44px - 120px);
-  min-height: calc(-webkit-fill-available - 44px - 44px - 120px);
+  padding-bottom: 160px;
+  /* 允许内容滚动 */
+  overflow-y: auto;
+  /* 与页面高度保持一致，增加底部空间确保内容可见 */
+  height: calc(100vh - 44px - 44px - 80px);
+  height: calc(-webkit-fill-available - 44px - 44px - 80px);
 }
 
 /* 类型卡片行 */

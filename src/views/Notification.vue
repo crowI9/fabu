@@ -151,8 +151,8 @@ const goToMessage = () => {
 
 <style scoped>
 .notification-page {
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
+  height: 100vh;
+  height: -webkit-fill-available;
   background: #F3F7F8;
   position: relative;
   /* iOS 状态栏规范：44px */
@@ -167,8 +167,9 @@ const goToMessage = () => {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  height: -webkit-fill-available;
   pointer-events: none;
   overflow: hidden;
   z-index: 0;
@@ -176,7 +177,7 @@ const goToMessage = () => {
 }
 
 .gradient-circle {
-  position: absolute;
+  position: fixed;
   border-radius: 50%;
   filter: blur(60px);
   opacity: 0.6;
@@ -296,7 +297,7 @@ const goToMessage = () => {
   z-index: 10;
   flex: 1;
   background: white;
-  border-radius: 8px 8px 0 0;
+  border-radius: 8px;
   margin: 16px;
   margin-bottom: 0;
   padding: 16px 0;

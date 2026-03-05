@@ -10,12 +10,12 @@
     </div>
 
     <!-- 顶部导航 -->
-    <div class="header">
-      <div class="header-left">
+    <div class="nav-header">
+      <div class="header-row">
         <img :src="getIconUrl('brand-logo.png')" alt="化化" class="brand-logo">
       </div>
-      <div class="header-right">
-        <img :src="getIconUrl('capsule-btn.png')" alt="菜单" class="capsule-btn-img">
+      <div class="nav-actions">
+        <img :src="getIconUrl('capsule-btn.png')" alt="菜单" class="capsule-btn">
       </div>
     </div>
 
@@ -637,7 +637,7 @@ const goToMessage = () => {
 }
 
 const goToTodo = () => {
-  router.push('/demand-manage')
+  router.push('/todo')
 }
 </script>
 
@@ -697,15 +697,18 @@ const goToTodo = () => {
 .font-t9 { font-size: 10px; line-height: 14px; font-weight: 400; }
 
 .home-page {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
   background: #F3F7F8;
   padding-bottom: 80px;
   overflow-x: hidden;
-  /* iOS 状态栏规范：44px + 8px 间距 */
-  padding-top: 52px;
+  overflow-y: auto;
+  padding-top: 44px;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* 背景装饰 - 覆盖整个页面 */
@@ -824,82 +827,43 @@ const goToTodo = () => {
   border-radius: 1.33px;
 }
 
-/* 顶部导航 - App 规范 */
-.header {
+/* 顶部导航栏 */
+.nav-header {
   position: relative;
+  z-index: 10;
+  padding: 12px 16px;
+  height: 44px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px 8px;
-  z-index: 10;
-  /* 确保在状态栏下方 */
-  margin-top: 0;
+  box-sizing: border-box;
 }
 
-.header-left {
+.nav-header .header-row {
   display: flex;
   align-items: center;
 }
 
-.brand-logo {
-  height: 28px;
+.nav-header .brand-logo {
+  height: 24px;
   width: auto;
   object-fit: contain;
 }
 
-.logo {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-}
-
-.logo-text {
-  font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-size: 24px;
-  font-weight: bold;
-  color: #262626;
-  letter-spacing: 2px;
-}
-
-.logo-slogan {
-  font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-size: 13px;
-  color: #8C8C8C;
-}
-
-.header-right {
+.nav-header .nav-actions {
   display: flex;
   align-items: center;
 }
 
-.capsule-btn-img {
+.nav-header .capsule-btn {
   width: 87px;
   height: 32px;
   object-fit: contain;
+  display: block;
 }
 
-.capsule-btn {
-  display: flex;
-  align-items: center;
-  width: 87px;
-  height: 32px;
-  background: rgba(255, 255, 255, 0.6);
-  border: 0.5px solid rgba(151, 151, 151, 0.2);
-  border-radius: 25px;
-  padding: 0 8px;
-}
-
-.capsule-left {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.dots {
-  display: flex;
-  gap: 3px;
-}
+/* 搜索栏 */
 
 .dots span {
   width: 4px;
@@ -952,7 +916,7 @@ const goToTodo = () => {
   position: relative;
   display: flex;
   align-items: center;
-  padding: 8px;
+  padding: 16px;
   z-index: 10;
 }
 
@@ -1039,7 +1003,7 @@ const goToTodo = () => {
 /* 平台保障和金刚区合并模块 */
 .guarantee-kingkong-wrapper {
   position: relative;
-  margin: 8px;
+  margin: 0 16px 16px;
   z-index: 10;
   border-radius: 8px;
   overflow: hidden;
@@ -1244,7 +1208,7 @@ const goToTodo = () => {
 /* 热门攻略 */
 .strategy-section {
   position: relative;
-  margin: 8px;
+  margin: 16px;
   padding: 16px 12px;
   background: #FFFFFF;
   border-radius: 8px;
@@ -1419,7 +1383,7 @@ const goToTodo = () => {
 /* 内容推荐 */
 .recommend-section {
   position: relative;
-  margin: 8px;
+  margin: 16px;
   padding: 16px;
   background: #FFFFFF;
   border-radius: 8px;
@@ -1862,7 +1826,7 @@ const goToTodo = () => {
 /* ========== 内容推荐模块新样式 ========== */
 .content-recommend {
   position: relative;
-  margin: 8px;
+  margin: 16px;
   padding: 12px;
   background: #FFFFFF;
   border-radius: 8px;

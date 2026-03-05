@@ -57,8 +57,8 @@
       
       <div class="tab-wrapper">
         <div class="tab-left">
-          <span class="tab-item active">全部</span>
-          <span class="tab-item">未读</span>
+          <span class="tab-item" :class="{ active: activeTab === 'all' }" @click="activeTab = 'all'">全部</span>
+          <span class="tab-item" :class="{ active: activeTab === 'unread' }" @click="activeTab = 'unread'">未读</span>
         </div>
         <button class="clear-btn" @click="clearAllUnread">清除未读</button>
       </div>
@@ -66,7 +66,7 @@
 
     <!-- 消息列表 -->
     <div class="message-list-container">
-      <div class="message-item" v-for="(item, index) in messageList" :key="index" @click="goToChat(item)">
+      <div class="message-item" v-for="(item, index) in filteredMessageList" :key="index" @click="goToChat(item)">
         <div class="avatar-wrapper">
           <img :src="item.avatar" alt="头像" class="avatar">
           <div class="unread-badge" v-if="item.unread">{{ item.unread }}</div>
@@ -88,7 +88,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import TabBar from '../components/TabBar.vue'
 
@@ -98,6 +98,14 @@ const todoCount = ref(1)
 const showNotificationBanner = ref(true)
 const messageUnreadCount = ref(3)
 const notificationUnreadCount = ref(5)
+const activeTab = ref('all')
+
+const filteredMessageList = computed(() => {
+  if (activeTab.value === 'unread') {
+    return messageList.value.filter(item => item.unread > 0)
+  }
+  return messageList.value
+})
 
 const enableNotification = () => {
   showNotificationBanner.value = false
@@ -146,8 +154,8 @@ const messageList = ref([
   },
   {
     avatar: '/images/avatar/company1.jpg',
-    name: '装修公司',
-    tag: '装修公司',
+    name: '潘晓婷',
+    tag: '中迈装饰·项目经理',
     time: '17:44',
     content: '您好，我近期准备装修，正在找装修公司。',
     unread: 0
@@ -165,15 +173,17 @@ const goToNotification = () => {
 
 <style scoped>
 .message-page {
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
+  height: 100vh;
+  height: -webkit-fill-available;
   background: #F3F7F8;
   position: relative;
   /* iOS 状态栏规范：44px 状态栏 */
   padding-top: 44px;
+  padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px));
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* 渐变背景装饰 - 覆盖整个页面 */
@@ -181,8 +191,9 @@ const goToNotification = () => {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  height: -webkit-fill-available;
   pointer-events: none;
   overflow: hidden;
   z-index: 0;
@@ -190,7 +201,7 @@ const goToNotification = () => {
 }
 
 .gradient-circle {
-  position: absolute;
+  position: fixed;
   border-radius: 50%;
   filter: blur(60px);
   opacity: 0.6;
@@ -283,7 +294,7 @@ const goToNotification = () => {
   background: white;
   border-radius: 20px;
   padding: 8px 12px;
-  margin-bottom: 12px;
+  margin: 0 0 12px;
   gap: 8px;
 }
 
@@ -455,9 +466,10 @@ const goToNotification = () => {
   z-index: 10;
   background: white;
   border-radius: 8px;
-  margin: 0 16px 16px;
+  margin: 0 16px;
   overflow-y: auto;
   flex: 1;
+  min-height: 0;
   -webkit-overflow-scrolling: touch;
 }
 

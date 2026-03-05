@@ -5,6 +5,9 @@
 html {
   /* 设置基准字体大小，方便 rem 计算 */
   font-size: 16px;
+  /* 固定高度为视口高度，防止内容撑开 */
+  height: 100vh;
+  height: -webkit-fill-available;
   /* 防止 iOS 点击高亮 */
   -webkit-tap-highlight-color: transparent;
   /* 优化字体渲染 */
@@ -13,6 +16,13 @@ html {
   /* 防止文字被选中 */
   -webkit-user-select: none;
   user-select: none;
+}
+
+/* body 也固定高度 */
+body {
+  height: 100vh;
+  height: -webkit-fill-available;
+  overflow: hidden;
 }
 
 /* ========== 响应式断点适配 ========== */

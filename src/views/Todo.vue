@@ -8,47 +8,45 @@
       <div class="gradient-circle circle-4"></div>
     </div>
 
-    <!-- 顶部导航栏 - 与消息页面保持一致 -->
+    <!-- 顶部导航栏 -->
     <div class="nav-header">
       <div class="header-row">
-        <div class="title-with-badge">
-          <h1 class="main-title">待办</h1>
-        </div>
+        <h1 class="page-title">待办</h1>
       </div>
       <div class="nav-actions">
         <img src="/images/icon/capsule-btn.png" alt="更多" class="capsule-btn">
       </div>
     </div>
 
-    <!-- Tab 切换栏 -->
-    <div class="tab-wrapper">
-      <div 
-        class="tab-item" 
-        :class="{ active: activeTab === 'todo' }"
-        @click="activeTab = 'todo'"
-      >
-        我的待办(4)
-      </div>
-      <div 
-        class="tab-item" 
-        :class="{ active: activeTab === 'demand' }"
-        @click="activeTab = 'demand'"
-      >
-        进行中的需求(1)
-      </div>
-      <div 
-        class="tab-item" 
-        :class="{ active: activeTab === 'order' }"
-        @click="activeTab = 'order'"
-      >
-        进行中的订单
-      </div>
-    </div>
-
     <!-- 内容区域 -->
     <div class="page-content">
-      <!-- 我的待办 Tab -->
-      <div v-if="activeTab === 'todo'" class="tab-content">
+      <!-- Tab 切换栏 -->
+      <div class="tab-wrapper">
+        <div 
+          class="tab-item" 
+          :class="{ active: activeTab === 'todo' }"
+          @click="activeTab = 'todo'"
+        >
+          我的待办(4)
+        </div>
+        <div 
+          class="tab-item" 
+          :class="{ active: activeTab === 'demand' }"
+          @click="activeTab = 'demand'"
+        >
+          进行中的需求(1)
+        </div>
+        <div 
+          class="tab-item" 
+          :class="{ active: activeTab === 'order' }"
+          @click="activeTab = 'order'"
+        >
+          进行中的订单
+        </div>
+      </div>
+
+      <!-- 待办列表 -->
+      <div class="todo-list">
         <!-- 查看报名服务方卡片 -->
         <div class="todo-card">
           <div class="card-header">
@@ -117,56 +115,6 @@
           </div>
         </div>
       </div>
-
-      <!-- 进行中的需求 Tab -->
-      <div v-if="activeTab === 'demand'" class="tab-content">
-        <div class="todo-card">
-          <div class="card-header">
-            <div class="title-bar"></div>
-            <h3 class="card-title">查看报名服务方</h3>
-          </div>
-          <div class="divider"></div>
-          <div class="card-body">
-            <div class="demand-row">
-              <span class="demand-tag">需求</span>
-              <span class="demand-title">100m²平层住宅 | 毛坯装修 | 全屋设计</span>
-            </div>
-          </div>
-          <div class="divider"></div>
-          <div class="card-footer">
-            <div class="stats-text">
-              已有<span class="highlight-num">10</span>位服务方报名，<span class="highlight-num">0</span>位服务方已报价
-            </div>
-          </div>
-          <div class="card-action">
-            <button class="action-btn primary">查看服务方</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- 进行中的订单 Tab -->
-      <div v-if="activeTab === 'order'" class="tab-content">
-        <div class="todo-card">
-          <div class="card-header">
-            <div class="title-bar"></div>
-            <h3 class="card-title">订单付款</h3>
-          </div>
-          <div class="divider"></div>
-          <div class="card-body">
-            <div class="order-info-row">
-              <span class="order-tag">订单</span>
-              <span class="service-name">设计服务</span>
-              <img src="/images/avatar/designer1.jpg" alt="头像" class="avatar-small">
-              <span class="user-name">潘晓琪</span>
-            </div>
-            <div class="order-desc">您有一笔订单待付款，请及时处理</div>
-          </div>
-          <div class="divider"></div>
-          <div class="card-action">
-            <button class="action-btn primary">去付款</button>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- 底部导航栏 -->
@@ -183,24 +131,24 @@ const activeTab = ref('todo')
 
 <style scoped>
 .todo-page {
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
+  height: 100vh;
+  height: -webkit-fill-available;
   background: #F3F7F8;
   position: relative;
-  /* iOS 状态栏规范：44px 状态栏 */
   padding-top: 44px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-/* 渐变背景装饰 - 覆盖整个页面 */
+/* 渐变背景 */
 .gradient-bg {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  height: -webkit-fill-available;
   pointer-events: none;
   overflow: hidden;
   z-index: 0;
@@ -208,7 +156,7 @@ const activeTab = ref('todo')
 }
 
 .gradient-circle {
-  position: absolute;
+  position: fixed;
   border-radius: 50%;
   filter: blur(60px);
   opacity: 0.6;
@@ -250,12 +198,11 @@ const activeTab = ref('todo')
   filter: blur(68px);
 }
 
-/* 顶部导航栏 - 与消息页面保持一致 */
+/* 顶部导航栏 */
 .nav-header {
   position: relative;
   z-index: 10;
   padding: 12px 16px;
-  /* iOS 导航栏规范 */
   height: 44px;
   flex-shrink: 0;
   display: flex;
@@ -266,22 +213,14 @@ const activeTab = ref('todo')
 .header-row {
   display: flex;
   align-items: center;
-  gap: 24px;
-  height: 100%;
 }
 
-.title-with-badge {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.main-title {
-  font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-size: 24px;
-  font-weight: 600;
+.page-title {
+  font-size: 32px;
+  font-family: 'DingTalk JinBuTi', 'PingFang SC', -apple-system, sans-serif;
+  font-weight: 400;
   color: #262626;
-  line-height: 32px;
+  line-height: 30px;
   margin: 0;
 }
 
@@ -297,14 +236,24 @@ const activeTab = ref('todo')
   display: block;
 }
 
-/* Tab 切换栏 */
-.tab-wrapper {
+/* 页面内容区域 */
+.page-content {
   position: relative;
   z-index: 10;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 100%);
+  border-radius: 8px;
+  margin: 0 16px;
+}
+
+/* Tab 切换栏 */
+.tab-wrapper {
   display: flex;
   align-items: center;
-  padding: 0 16px;
-  margin-bottom: 12px;
+  padding: 16px 16px 0;
   gap: 20px;
   flex-shrink: 0;
 }
@@ -325,27 +274,17 @@ const activeTab = ref('todo')
   color: #262626;
 }
 
-/* 页面内容区域 */
-.page-content {
-  position: relative;
-  z-index: 10;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  padding: 0 8px;
-}
-
-.tab-content {
+/* 待办列表 */
+.todo-list {
   flex: 1;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding-bottom: 16px;
+  padding: 16px;
 }
 
-/* 我的待办卡片 */
+/* 待办卡片 */
 .todo-card {
   background: white;
   border-radius: 8px;
@@ -381,7 +320,7 @@ const activeTab = ref('todo')
 .divider {
   height: 1px;
   background: #F6F6F6;
-  margin: 0 8px;
+  margin: 0 16px;
 }
 
 .card-body {
