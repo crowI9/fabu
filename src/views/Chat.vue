@@ -8,198 +8,204 @@
       <div class="gradient-circle circle-4"></div>
     </div>
 
-    <!-- 顶部导航栏 - 与Message页面保持完全一致 -->
-    <div class="nav-header">
-      <div class="header-row">
-        <div class="nav-left" @click="goBack">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M15 19L8 12L15 5" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="nav-title">潘晓琪</div>
-      </div>
-      <div class="nav-actions">
-        <img src="/images/icon/capsule-btn.png" alt="更多" class="capsule-btn">
-      </div>
-    </div>
-
-    <!-- 用户信息卡片 -->
-    <div class="user-info-card">
-      <div class="user-header">
-        <img src="/images/avatar/designer1.jpg" alt="头像" class="user-avatar">
-        <div class="user-details">
-          <div class="user-name-row">
-            <span class="user-name">潘晓琪</span>
-            <span class="user-badge">个人设计师</span>
+    <!-- 页面内容容器 -->
+    <div class="page-container">
+      <!-- 顶部导航栏 - 与Message页面保持完全一致 -->
+      <div class="nav-header">
+        <div class="header-row">
+          <div class="nav-left" @click="goBack">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M15 19L8 12L15 5" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </div>
-          <div class="user-stats">
-            <div class="rating">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="#F55F4E">
-                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+          <div class="nav-title">潘晓琪</div>
+        </div>
+        <div class="nav-actions">
+          <img src="/images/icon/capsule-btn.png" alt="更多" class="capsule-btn">
+        </div>
+      </div>
+
+      <!-- 中间内容区域 - 可滚动 -->
+      <div class="content-scroll-area">
+        <!-- 用户信息卡片 -->
+        <div class="user-info-card">
+          <div class="user-header">
+            <img src="/images/avatar/designer1.jpg" alt="头像" class="user-avatar">
+            <div class="user-details">
+              <div class="user-name-row">
+                <span class="user-name">潘晓琪</span>
+                <span class="user-badge">个人设计师</span>
+              </div>
+              <div class="user-stats">
+                <div class="rating">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="#F55F4E">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                  </svg>
+                  <span class="score">4.7分</span>
+                </div>
+                <span class="stat-divider">·</span>
+                <span class="stat-text">已服务 <span class="stat-num">132</span></span>
+                <span class="stat-divider">·</span>
+                <span class="stat-text">累计获赞 <span class="stat-num">456</span></span>
+              </div>
+            </div>
+            <button class="view-profile-btn">看ta主页</button>
+          </div>
+          <div class="user-tags">
+            <span class="tag">从业十年</span>
+            <span class="tag">普通平层设计</span>
+            <span class="tag">现代简约</span>
+            <span class="tag">法式复古</span>
+            <span class="tag">沟通耐心</span>
+            <span class="tag">设计创新</span>
+            <span class="tag">全套图纸</span>
+          </div>
+        </div>
+
+        <!-- 聊天内容区域 -->
+        <div class="chat-content" ref="chatContent">
+          <div class="chat-time">2024/03/12 10:52</div>
+          
+          <!-- 对方消息 -->
+          <div class="message-item received">
+            <img src="/images/avatar/designer1.jpg" alt="头像" class="message-avatar">
+            <div class="message-content">
+              <div class="message-bubble blue">
+                <div class="message-text">你好，我近期准备装修，正在找设计师，看到你的履历非常优秀，可以聊聊吗？</div>
+              </div>
+              <div class="read-status">已读</div>
+            </div>
+          </div>
+
+          <!-- 我的消息 -->
+          <div class="message-item sent">
+            <div class="message-content">
+              <div class="message-bubble white">
+                <div class="message-text">可以的，您把需求先发我看看，然后咱们再详细沟通~</div>
+              </div>
+            </div>
+            <img src="/images/avatar/worker1.jpg" alt="头像" class="message-avatar">
+          </div>
+
+          <!-- 动态渲染的消息列表 -->
+          <div 
+            v-for="(msg, index) in messageList" 
+            :key="index"
+            :class="['message-item', msg.type]"
+          >
+            <!-- 对方消息 -->
+            <template v-if="msg.type === 'received'">
+              <img src="/images/avatar/designer1.jpg" alt="头像" class="message-avatar">
+              <div class="message-content">
+                <!-- 文本消息 -->
+                <div v-if="msg.messageType === 'text'" class="message-bubble blue">
+                  <div class="message-text">{{ msg.content }}</div>
+                </div>
+                <!-- 需求卡片消息 -->
+                <div v-else-if="msg.messageType === 'demand'" class="demand-card">
+                  <div class="demand-card-header">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <path d="M9 11L12 14L22 4M21 12V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>装修需求</span>
+                  </div>
+                  <div class="demand-card-body">
+                    <div class="demand-row">
+                      <span class="demand-label">类型：</span>
+                      <span class="demand-value">{{ msg.demand.type }}</span>
+                    </div>
+                    <div class="demand-row">
+                      <span class="demand-label">面积：</span>
+                      <span class="demand-value">{{ msg.demand.area }}㎡</span>
+                    </div>
+                    <div class="demand-row">
+                      <span class="demand-label">户型：</span>
+                      <span class="demand-value">{{ msg.demand.houseType }}</span>
+                    </div>
+                    <div class="demand-row">
+                      <span class="demand-label">预算：</span>
+                      <span class="demand-value budget">{{ msg.demand.budget }}</span>
+                    </div>
+                  </div>
+                  <div class="demand-card-footer">{{ msg.demand.community }}</div>
+                </div>
+                <div class="read-status" v-if="msg.messageType === 'text'">已读</div>
+              </div>
+            </template>
+
+            <!-- 我的消息 -->
+            <template v-if="msg.type === 'sent'">
+              <div class="message-content">
+                <!-- 文本消息 -->
+                <div v-if="msg.messageType === 'text'" class="message-bubble white">
+                  <div class="message-text">{{ msg.content }}</div>
+                </div>
+                <!-- 需求卡片消息 -->
+                <div v-else-if="msg.messageType === 'demand'" class="demand-card">
+                  <div class="demand-card-header">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <path d="M9 11L12 14L22 4M21 12V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>装修需求</span>
+                  </div>
+                  <div class="demand-card-body">
+                    <div class="demand-row">
+                      <span class="demand-label">类型：</span>
+                      <span class="demand-value">{{ msg.demand.type }}</span>
+                    </div>
+                    <div class="demand-row">
+                      <span class="demand-label">面积：</span>
+                      <span class="demand-value">{{ msg.demand.area }}㎡</span>
+                    </div>
+                    <div class="demand-row">
+                      <span class="demand-label">户型：</span>
+                      <span class="demand-value">{{ msg.demand.houseType }}</span>
+                    </div>
+                    <div class="demand-row">
+                      <span class="demand-label">预算：</span>
+                      <span class="demand-value budget">{{ msg.demand.budget }}</span>
+                    </div>
+                  </div>
+                  <div class="demand-card-footer">{{ msg.demand.community }}</div>
+                </div>
+              </div>
+              <img src="/images/avatar/worker1.jpg" alt="头像" class="message-avatar">
+            </template>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部输入区域 -->
+      <div class="chat-input-area">
+        <div class="input-wrapper">
+          <button class="quick-action-btn" @click="showDemandSelector">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M12 5V19M5 12H19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>发需求</span>
+          </button>
+          <input 
+            type="text" 
+            class="message-input" 
+            placeholder="回复消息" 
+            v-model="inputMessage" 
+            @keyup.enter="sendMessage"
+          >
+          <div class="input-actions">
+            <button class="action-btn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8 14C8 14 9.5 16 12 16C14.5 16 16 14 16 14" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 9H9.01" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15 9H15.01" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span class="score">4.7分</span>
-            </div>
-            <span class="stat-divider">·</span>
-            <span class="stat-text">已服务 <span class="stat-num">132</span></span>
-            <span class="stat-divider">·</span>
-            <span class="stat-text">累计获赞 <span class="stat-num">456</span></span>
+            </button>
+            <button class="action-btn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 5V19M5 12H19" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
           </div>
-        </div>
-        <button class="view-profile-btn">看ta主页</button>
-      </div>
-      <div class="user-tags">
-        <span class="tag">从业十年</span>
-        <span class="tag">普通平层设计</span>
-        <span class="tag">现代简约</span>
-        <span class="tag">法式复古</span>
-        <span class="tag">沟通耐心</span>
-        <span class="tag">设计创新</span>
-        <span class="tag">全套图纸</span>
-      </div>
-    </div>
-
-    <!-- 聊天内容区域 -->
-    <div class="chat-content" ref="chatContent">
-      <div class="chat-time">2024/03/12 10:52</div>
-      
-      <!-- 对方消息 -->
-      <div class="message-item received">
-        <img src="/images/avatar/designer1.jpg" alt="头像" class="message-avatar">
-        <div class="message-content">
-          <div class="message-bubble blue">
-            <div class="message-text">你好，我近期准备装修，正在找设计师，看到你的履历非常优秀，可以聊聊吗？</div>
-          </div>
-          <div class="read-status">已读</div>
-        </div>
-      </div>
-
-      <!-- 我的消息 -->
-      <div class="message-item sent">
-        <div class="message-content">
-          <div class="message-bubble white">
-            <div class="message-text">可以的，您把需求先发我看看，然后咱们再详细沟通~</div>
-          </div>
-        </div>
-        <img src="/images/avatar/worker1.jpg" alt="头像" class="message-avatar">
-      </div>
-
-      <!-- 动态渲染的消息列表 -->
-      <div 
-        v-for="(msg, index) in messageList" 
-        :key="index"
-        :class="['message-item', msg.type]"
-      >
-        <!-- 对方消息 -->
-        <template v-if="msg.type === 'received'">
-          <img src="/images/avatar/designer1.jpg" alt="头像" class="message-avatar">
-          <div class="message-content">
-            <!-- 文本消息 -->
-            <div v-if="msg.messageType === 'text'" class="message-bubble blue">
-              <div class="message-text">{{ msg.content }}</div>
-            </div>
-            <!-- 需求卡片消息 -->
-            <div v-else-if="msg.messageType === 'demand'" class="demand-card">
-              <div class="demand-card-header">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M9 11L12 14L22 4M21 12V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span>装修需求</span>
-              </div>
-              <div class="demand-card-body">
-                <div class="demand-row">
-                  <span class="demand-label">类型：</span>
-                  <span class="demand-value">{{ msg.demand.type }}</span>
-                </div>
-                <div class="demand-row">
-                  <span class="demand-label">面积：</span>
-                  <span class="demand-value">{{ msg.demand.area }}㎡</span>
-                </div>
-                <div class="demand-row">
-                  <span class="demand-label">户型：</span>
-                  <span class="demand-value">{{ msg.demand.houseType }}</span>
-                </div>
-                <div class="demand-row">
-                  <span class="demand-label">预算：</span>
-                  <span class="demand-value budget">{{ msg.demand.budget }}</span>
-                </div>
-              </div>
-              <div class="demand-card-footer">{{ msg.demand.community }}</div>
-            </div>
-            <div class="read-status" v-if="msg.messageType === 'text'">已读</div>
-          </div>
-        </template>
-
-        <!-- 我的消息 -->
-        <template v-if="msg.type === 'sent'">
-          <div class="message-content">
-            <!-- 文本消息 -->
-            <div v-if="msg.messageType === 'text'" class="message-bubble white">
-              <div class="message-text">{{ msg.content }}</div>
-            </div>
-            <!-- 需求卡片消息 -->
-            <div v-else-if="msg.messageType === 'demand'" class="demand-card">
-              <div class="demand-card-header">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M9 11L12 14L22 4M21 12V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span>装修需求</span>
-              </div>
-              <div class="demand-card-body">
-                <div class="demand-row">
-                  <span class="demand-label">类型：</span>
-                  <span class="demand-value">{{ msg.demand.type }}</span>
-                </div>
-                <div class="demand-row">
-                  <span class="demand-label">面积：</span>
-                  <span class="demand-value">{{ msg.demand.area }}㎡</span>
-                </div>
-                <div class="demand-row">
-                  <span class="demand-label">户型：</span>
-                  <span class="demand-value">{{ msg.demand.houseType }}</span>
-                </div>
-                <div class="demand-row">
-                  <span class="demand-label">预算：</span>
-                  <span class="demand-value budget">{{ msg.demand.budget }}</span>
-                </div>
-              </div>
-              <div class="demand-card-footer">{{ msg.demand.community }}</div>
-            </div>
-          </div>
-          <img src="/images/avatar/worker1.jpg" alt="头像" class="message-avatar">
-        </template>
-      </div>
-    </div>
-
-    <!-- 底部输入区域 -->
-    <div class="chat-input-area">
-      <div class="input-wrapper">
-        <button class="quick-action-btn" @click="showDemandSelector">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-            <path d="M12 5V19M5 12H19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span>发需求</span>
-        </button>
-        <input 
-          type="text" 
-          class="message-input" 
-          placeholder="回复消息" 
-          v-model="inputMessage" 
-          @keyup.enter="sendMessage"
-        >
-        <div class="input-actions">
-          <button class="action-btn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M8 14C8 14 9.5 16 12 16C14.5 16 16 14 16 14" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M9 9H9.01" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M15 9H15.01" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <button class="action-btn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M12 5V19M5 12H19" stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
         </div>
       </div>
     </div>
@@ -355,8 +361,6 @@ const confirmSendDemand = () => {
   height: -webkit-fill-available;
   background: #F3F7F8;
   position: relative;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
 }
 
@@ -416,10 +420,17 @@ const confirmSendDemand = () => {
   filter: blur(68px);
 }
 
-/* 顶部导航栏 - 与Message页面保持完全一致 */
-.nav-header {
+/* 页面内容容器 - 使用flex布局 */
+.page-container {
   position: relative;
   z-index: 10;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部导航栏 - 与Message页面保持完全一致 */
+.nav-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -465,15 +476,20 @@ const confirmSendDemand = () => {
   display: block;
 }
 
-/* 用户信息卡片 - 与顶部导航栏保持16px间距 */
+/* 中间内容区域 - 可滚动 */
+.content-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+}
+
+/* 用户信息卡片 */
 .user-info-card {
-  position: relative;
-  z-index: 10;
-  margin: 16px 16px 0;
+  margin-bottom: 16px;
   padding: 16px;
   background: white;
   border-radius: 12px;
-  flex-shrink: 0;
 }
 
 .user-header {
@@ -586,15 +602,9 @@ const confirmSendDemand = () => {
   color: #198CFE;
 }
 
-/* 聊天内容区域 - 与用户信息卡片保持16px间距 */
+/* 聊天内容区域 */
 .chat-content {
-  position: relative;
-  z-index: 10;
-  flex: 1;
-  padding: 16px;
-  margin-top: 16px;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  padding: 0;
 }
 
 .chat-time {
@@ -738,15 +748,13 @@ const confirmSendDemand = () => {
   border-top: 1px solid #F0F0F0;
 }
 
-/* 底部输入区域 - 底部对齐 */
+/* 底部输入区域 - 固定在底部 */
 .chat-input-area {
-  position: relative;
-  z-index: 10;
   background: white;
   padding: 12px 16px;
   padding-bottom: calc(12px + env(safe-area-inset-bottom));
   flex-shrink: 0;
-  margin-top: auto;
+  border-top: 1px solid #F0F0F0;
 }
 
 .input-wrapper {
