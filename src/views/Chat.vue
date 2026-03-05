@@ -165,9 +165,11 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+const showMenu = ref(false)
 
 const goBack = () => {
   router.back()
@@ -175,6 +177,30 @@ const goBack = () => {
 
 const goToDemandList = () => {
   router.push('/demand-list')
+}
+
+const toggleMenu = () => {
+  showMenu.value = !showMenu.value
+}
+
+const sendImage = () => {
+  console.log('发送图片')
+  showMenu.value = false
+}
+
+const sendAddress = () => {
+  console.log('发送地址')
+  showMenu.value = false
+}
+
+const sendCase = () => {
+  console.log('发送案例')
+  showMenu.value = false
+}
+
+const sendMoment = () => {
+  console.log('发送动态')
+  showMenu.value = false
 }
 </script>
 
@@ -571,6 +597,42 @@ const goToDemandList = () => {
 }
 
 .message-input::placeholder {
+  color: #8C8C8C;
+}
+
+/* 功能菜单 */
+.function-menu {
+  display: flex;
+  gap: 32px;
+  padding: 16px 24px;
+  background: #F5F5F6;
+  margin: 0 -16px;
+  margin-top: 12px;
+  margin-bottom: calc(-12px - env(safe-area-inset-bottom));
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.menu-icon {
+  width: 56px;
+  height: 56px;
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-text {
+  font-size: 14px;
+  font-family: 'PingFang SC', -apple-system, sans-serif;
+  font-weight: 400;
   color: #8C8C8C;
 }
 </style>
