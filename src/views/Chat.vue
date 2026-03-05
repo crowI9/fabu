@@ -414,7 +414,7 @@ const confirmSendDemand = () => {
   filter: blur(68px);
 }
 
-/* 顶部导航栏 */
+/* 顶部导航栏 - 与Message/Todo页面保持一致 */
 .nav-header {
   position: relative;
   z-index: 10;
@@ -453,7 +453,7 @@ const confirmSendDemand = () => {
   object-fit: contain;
 }
 
-/* 用户信息卡片 */
+/* 用户信息卡片 - 与页面内容保持对齐 */
 .user-info-card {
   position: relative;
   z-index: 10;
@@ -574,7 +574,7 @@ const confirmSendDemand = () => {
   color: #198CFE;
 }
 
-/* 聊天内容区域 */
+/* 聊天内容区域 - 与页面高度保持一致 */
 .chat-content {
   position: relative;
   z-index: 10;
