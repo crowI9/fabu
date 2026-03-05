@@ -11,12 +11,17 @@
     <!-- 顶部导航栏 -->
     <div class="nav-header">
       <div class="header-row">
-        <div class="nav-left">
-          <h1 class="page-title">通知</h1>
+        <div class="title-with-badge" @click="goToMessage">
+          <h1 class="main-title">消息</h1>
+          <span class="tab-badge" v-if="messageUnreadCount > 0">{{ messageUnreadCount }}</span>
         </div>
-        <div class="nav-actions">
-          <img src="/images/icon/capsule-btn.png" alt="更多" class="capsule-btn">
+        <div class="title-with-badge active">
+          <span class="notification-title">通知</span>
+          <span class="tab-badge" v-if="notificationUnreadCount > 0">{{ notificationUnreadCount }}</span>
         </div>
+      </div>
+      <div class="nav-actions">
+        <img src="/images/icon/capsule-btn.png" alt="更多" class="capsule-btn">
       </div>
     </div>
 
@@ -131,10 +136,16 @@ const router = useRouter()
 
 const systemUnread = ref(1)
 const transactionUnread = ref(1)
+const messageUnreadCount = ref(3)
+const notificationUnreadCount = ref(5)
 
 const goToDetail = (type) => {
   console.log('查看通知详情:', type)
   // router.push(`/notification/${type}`)
+}
+
+const goToMessage = () => {
+  router.push('/message')
 }
 </script>
 
@@ -224,21 +235,49 @@ const goToDetail = (type) => {
   height: 100%;
 }
 
-.nav-left {
+.title-with-badge {
   display: flex;
   align-items: center;
+  gap: 4px;
+  cursor: pointer;
 }
 
-.page-title {
-  font-size: 24px;
+.main-title {
   font-family: 'PingFang SC', -apple-system, sans-serif;
-  font-weight: 600;
-  color: #262626;
-  line-height: 30px;
+  font-size: 17px;
+  font-weight: 400;
+  color: #8C8C8C;
+  line-height: 22px;
   margin: 0;
 }
 
+.notification-title {
+  font-family: 'PingFang SC', -apple-system, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #262626;
+  line-height: 30px;
+}
+
+.tab-badge {
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  background: #F55F4E;
+  border-radius: 8px;
+  font-family: 'PingFang SC', -apple-system, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: white;
+  line-height: 16px;
+  text-align: center;
+}
+
 .nav-actions {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
 }
