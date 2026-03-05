@@ -296,8 +296,8 @@ const goToMessage = () => {
   flex: 1;
   background: white;
   border-radius: 8px 8px 0 0;
-  margin: 8px;
-  margin-top: 16px;
+  margin: 16px;
+  margin-bottom: 0;
   padding: 16px 0;
   overflow-y: auto;
 }
