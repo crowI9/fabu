@@ -74,6 +74,7 @@
           <div class="message-bubble">
             <div class="message-text">您好，感谢您的咨询！请问您大概什么时候需要开始装修呢？</div>
           </div>
+          <img src="/images/avatar/designer1.jpg" alt="头像" class="message-avatar">
         </div>
 
         <!-- 对方消息 -->
@@ -89,6 +90,7 @@
           <div class="message-bubble">
             <div class="message-text">没问题，我们可以约个时间。您这周方便吗？</div>
           </div>
+          <img src="/images/avatar/designer1.jpg" alt="头像" class="message-avatar">
         </div>
       </div>
     </div>
@@ -259,7 +261,7 @@ const goBack = () => {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: 0 16px;
+  padding: 16px;
   gap: 16px;
 }
 
@@ -382,8 +384,15 @@ const goBack = () => {
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  margin-right: 12px;
   flex-shrink: 0;
+}
+
+.message-row.received .message-avatar {
+  margin-right: 12px;
+}
+
+.message-row.sent .message-avatar {
+  margin-left: 12px;
 }
 
 .message-bubble {
